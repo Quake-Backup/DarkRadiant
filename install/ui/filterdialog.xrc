@@ -33,6 +33,7 @@
                 <border>6</border>
                 <option>0</option>
                 <object class="wxButton" name="FilterDialogAddButton">
+                  <style>wxBU_EXACTFIT</style>
                   <tooltip>Add a filter</tooltip>
                   <label></label>
                   <default>0</default>
@@ -46,12 +47,13 @@
                 <border>6</border>
                 <option>0</option>
                 <object class="wxButton" name="FilterDialogViewButton">
+                  <style>wxBU_EXACTFIT</style>
                   <tooltip>View the selected filter</tooltip>
-                  <label>View</label>
+                  <label></label>
                   <default>0</default>
                   <auth_needed>0</auth_needed>
                   <markup>0</markup>
-                  <bitmap/>
+                  <bitmap>../bitmaps/view.png</bitmap>
                 </object>
               </object>
               <object class="sizeritem">
@@ -59,6 +61,7 @@
                 <border>6</border>
                 <option>0</option>
                 <object class="wxButton" name="FilterDialogEditButton">
+                  <style>wxBU_EXACTFIT</style>
                   <tooltip>Edit the selected filter</tooltip>
                   <label></label>
                   <default>0</default>
@@ -72,12 +75,13 @@
                 <border>6</border>
                 <option>0</option>
                 <object class="wxButton" name="FilterDialogCopyButton">
+                  <style>wxBU_EXACTFIT</style>
                   <tooltip>Clone the selected filter</tooltip>
-                  <label>Copy</label>
+                  <label></label>
                   <default>0</default>
                   <auth_needed>0</auth_needed>
                   <markup>0</markup>
-                  <bitmap/>
+                  <bitmap>../bitmaps/copy.png</bitmap>
                 </object>
               </object>
               <object class="sizeritem">
@@ -85,6 +89,7 @@
                 <border>6</border>
                 <option>0</option>
                 <object class="wxButton" name="FilterDialogDeleteButton">
+                  <style>wxBU_EXACTFIT</style>
                   <tooltip>Delete the selected filter</tooltip>
                   <label></label>
                   <default>0</default>
