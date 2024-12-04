@@ -5,9 +5,7 @@
 #include "icommandsystem.h"
 
 #include <map>
-#include <vector>
 #include <string>
-#include <iostream>
 
 #include "xmlutil/Node.h"
 #include "XMLFilter.h"

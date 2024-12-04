@@ -301,8 +301,6 @@ RenderStateFlags MaterialPreview::getRenderFlagsFill()
 
 void MaterialPreview::setupSceneGraph()
 {
-    RenderPreview::setupSceneGraph();
-
     try
     {
         _rootNode = std::make_shared<scene::BasicRootNode>();

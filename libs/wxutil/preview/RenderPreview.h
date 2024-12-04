@@ -138,7 +138,7 @@ protected:
 
     // Subclasses should at least add a single node as scene root, such that
     // the rendersystem can be associated. This is called after initialisePreview()
-    virtual void setupSceneGraph();
+    virtual void setupSceneGraph() {};
 
     virtual const Matrix4& getModelViewMatrix();
 

@@ -289,18 +289,16 @@ const scene::GraphPtr& RenderPreview::getScene()
     {
         _scene = GlobalSceneGraphFactory().createSceneGraph();
 
+        // Set our render time to 0
+        _renderSystem->setTime(0);
+        
+        // Invoke subclass method to set up the specific scene graph required,
+        // then attach it to the render system
         setupSceneGraph();
-
         associateRenderSystem();
     }
 
     return _scene;
-}
-
-void RenderPreview::setupSceneGraph()
-{
-    // Set our render time to 0
-    _renderSystem->setTime(0);
 }
 
 void RenderPreview::associateRenderSystem()

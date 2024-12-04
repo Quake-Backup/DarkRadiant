@@ -10,8 +10,6 @@
 #include "scene/BasicRootNode.h"
 #include <fmt/format.h>
 
-#include "wxutil/GLWidget.h"
-
 namespace ui
 {
 
@@ -170,8 +168,6 @@ void AnimationPreview::setAnim(const md5::IMD5AnimPtr& anim)
 
 void AnimationPreview::setupSceneGraph()
 {
-	RenderPreview::setupSceneGraph();
-
     _root = std::make_shared<scene::BasicRootNode>();
 
 	_entity = GlobalEntityModule().createEntity(

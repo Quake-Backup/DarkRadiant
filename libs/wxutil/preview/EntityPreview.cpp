@@ -65,8 +65,6 @@ void EntityPreview::setEntity(const EntityNodePtr& entity)
 
 void EntityPreview::setupSceneGraph()
 {
-    RenderPreview::setupSceneGraph();
-
     try
     {
         _rootNode = std::make_shared<scene::BasicRootNode>();

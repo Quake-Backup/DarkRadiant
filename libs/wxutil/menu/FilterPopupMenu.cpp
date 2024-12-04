@@ -1,5 +1,6 @@
 #include "FilterPopupMenu.h"
 
+#include "ifilter.h"
 #include "ui/ieventmanager.h"
 #include <wx/menu.h>
 
@@ -16,14 +17,14 @@ namespace
 FilterPopupMenu::FilterPopupMenu()
 {
 	// Visit the filters in the FilterSystem to populate the menu
-	GlobalFilterSystem().forEachFilter(std::bind(&FilterPopupMenu::visitFilter, this, std::placeholders::_1));
+    GlobalFilterSystem().forEachFilter([=](const std::string& name) { visitFilter(name); });
 }
 
 FilterPopupMenu::~FilterPopupMenu()
 {
-	for (const auto& item : _filterItems)
+	for (const auto& [name, menuItem] : _filterItems)
 	{
-		GlobalEventManager().unregisterMenuItem(item.first, item.second);
+		GlobalEventManager().unregisterMenuItem(name, menuItem);
 	}
 }
 
