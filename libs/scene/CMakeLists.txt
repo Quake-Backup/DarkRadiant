@@ -6,6 +6,7 @@ add_library(scene
             EntityKeyValue.cpp
             EntityNode.cpp
             EntitySettings.cpp
+            filters/SceneFilter.cpp
             KeyValueObserver.cpp
             LayerUsageBreakdown.cpp
             ModelFinder.cpp

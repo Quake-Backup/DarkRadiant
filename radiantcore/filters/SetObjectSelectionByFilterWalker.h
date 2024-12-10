@@ -5,9 +5,8 @@
 #include "ipatch.h"
 #include "ibrush.h"
 #include "scene/EntityNode.h"
+#include "scene/filters/SceneFilter.h"
 #include "iselectable.h"
-
-#include "XMLFilter.h"
 
 namespace filters
 {
@@ -16,11 +15,11 @@ class SetObjectSelectionByFilterWalker :
 	public scene::NodeVisitor
 {
 private:
-	XMLFilter& _filter;
+	SceneFilter& _filter;
 	bool _selectIfFiltered;
 
 public:
-	SetObjectSelectionByFilterWalker(XMLFilter& filter, bool selectIfFiltered) :
+	SetObjectSelectionByFilterWalker(SceneFilter& filter, bool selectIfFiltered) :
 		_filter(filter),
 		_selectIfFiltered(selectIfFiltered)
 	{}

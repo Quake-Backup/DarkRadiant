@@ -1,20 +1,20 @@
 #pragma once
 
 #include <string>
-#include <vector>
 #include "ifilter.h"
 
 namespace filters
 {
 
-/** Class encapsulting a single filter. This consists of a name, and a list of
- * filter rules, and methods to query textures, entityclasses and objects against
- * these rules.
+/**
+ * @brief Representation of a single scene filter (broadly corresponding to a
+ * single entry in the Filters menu).
+ *
+ * Each filter consists of a name, and a list of filter rules. The class exposes
+ * methods to query textures, entityclasses and objects against these rules.
  */
-
-class XMLFilter
+class SceneFilter
 {
-private:
 	// Text name of filter (from game.xml)
 	std::string _name;
 
@@ -28,17 +28,17 @@ private:
 	bool _readonly;
 
 public:
-	typedef std::shared_ptr<XMLFilter> Ptr;
+	typedef std::shared_ptr<SceneFilter> Ptr;
 
-	/** Construct an XMLFilter with the given name.
+	/** Construct an SceneFilter with the given name.
 	 * Pass the read-only flag to indicate whether this filter is
 	 * custom or coming from the "stock" filters in the .game files.
 	 */
-	XMLFilter(const std::string& name, bool readOnly);
+	SceneFilter(const std::string& name, bool readOnly);
 
 	// Noncopyable
-	XMLFilter(const XMLFilter&) = delete;
-	XMLFilter& operator=(const XMLFilter&) = delete;
+	SceneFilter(const SceneFilter&) = delete;
+	SceneFilter& operator=(const SceneFilter&) = delete;
 
 	/** Add a (non entitykeyvalue) rule to this filter.
 	 *
@@ -75,7 +75,7 @@ public:
 	}
 
 	/** Test a given item for visibility against all of the rules
-	 * in this XMLFilter.
+	 * in this SceneFilter.
 	 *
 	 * @param type
 	 * Class of the item to test - "texture", "entityclass" etc
@@ -86,7 +86,7 @@ public:
 	bool isVisible(const FilterRule::Type type, const std::string& name) const;
 
 	/** Test a given entity for visibility against all of the rules
-	 * in this XMLFilter.
+	 * in this SceneFilter.
 	 *
 	 * @param type
 	 * Class of the item to test - "texture", "entityclass" etc

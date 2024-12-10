@@ -206,9 +206,9 @@ void BasicFilterSystem::addFiltersFromXML(const xml::NodeList& nodes, bool readO
 	// Iterate over the list of nodes, adding filter objects onto the list
 	for (const auto& node : nodes)
 	{
-		// Initialise the XMLFilter object
+		// Initialise the SceneFilter object
 		std::string filterName = node.getAttributeValue("name");
-		auto filter = std::make_shared<XMLFilter>(filterName, readOnly);
+		auto filter = std::make_shared<SceneFilter>(filterName, readOnly);
 
 		// Get all of the filterCriterion children of this node
 		xml::NodeList critNodes = node.getNamedChildren("filterCriterion");
@@ -238,8 +238,8 @@ void BasicFilterSystem::addFiltersFromXML(const xml::NodeList& nodes, bool readO
 			}
 		}
 
-		// Add this XMLFilter to the list of available filters
-		XMLFilter::Ptr inserted = _availableFilters.emplace(filterName, filter).first->second;
+		// Add this SceneFilter to the list of available filters
+		SceneFilter::Ptr inserted = _availableFilters.emplace(filterName, filter).first->second;
 
 		bool filterShouldBeActive = activeFilterNames.find(filterName) != activeFilterNames.end();
 
@@ -253,7 +253,7 @@ void BasicFilterSystem::addFiltersFromXML(const xml::NodeList& nodes, bool readO
 	}
 }
 
-XmlFilterEventAdapter::Ptr BasicFilterSystem::ensureEventAdapter(XMLFilter& filter)
+XmlFilterEventAdapter::Ptr BasicFilterSystem::ensureEventAdapter(SceneFilter& filter)
 {
 	auto existing = _eventAdapters.find(filter.getName());
 
@@ -419,7 +419,7 @@ bool BasicFilterSystem::addFilter(const std::string& filterName, const FilterRul
 		return false; // already exists
 	}
 
-	auto filter = std::make_shared<XMLFilter>(filterName, false);
+	auto filter = std::make_shared<SceneFilter>(filterName, false);
 	_availableFilters.emplace(filterName, filter);
 
 	// Apply the ruleset

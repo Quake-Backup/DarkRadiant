@@ -48,7 +48,6 @@ add_library(radiantcore MODULE
             entity/speaker/SpeakerRenderables.cpp
             filetypes/FileTypeRegistry.cpp
             filters/BasicFilterSystem.cpp
-            filters/XMLFilter.cpp
             filters/XmlFilterEventAdapter.cpp
             fonts/FontLoader.cpp
             fonts/FontManager.cpp

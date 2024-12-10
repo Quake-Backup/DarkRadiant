@@ -8,7 +8,7 @@
 #include <string>
 
 #include "xmlutil/Node.h"
-#include "XMLFilter.h"
+#include "scene/filters/SceneFilter.h"
 #include "XmlFilterEventAdapter.h"
 
 namespace filters
@@ -21,7 +21,7 @@ class BasicFilterSystem :
 {
 private:
 	// Hashtable of available filters, indexed by name
-	typedef std::map<std::string, XMLFilter::Ptr> FilterTable;
+	typedef std::map<std::string, SceneFilter::Ptr> FilterTable;
 	FilterTable _availableFilters;
 
 	// Second table containing just the active filters
@@ -48,7 +48,7 @@ private:
 
 	void addFiltersFromXML(const xml::NodeList& nodes, bool readOnly);
 
-	XmlFilterEventAdapter::Ptr ensureEventAdapter(XMLFilter& filter);
+	XmlFilterEventAdapter::Ptr ensureEventAdapter(SceneFilter& filter);
 
 	void setFilterStateCmd(const cmd::ArgumentList& args);
 	void toggleFilterStateCmd(const cmd::ArgumentList& args);

@@ -1,4 +1,4 @@
-#include "XMLFilter.h"
+#include "SceneFilter.h"
 
 #include "scene/Entity.h"
 #include "ieclass.h"
@@ -9,7 +9,7 @@
 namespace filters
 {
 
-XMLFilter::XMLFilter(const std::string& name, bool readOnly) :
+SceneFilter::SceneFilter(const std::string& name, bool readOnly) :
 	_name(name),
 	_readonly(readOnly)
 {
@@ -17,7 +17,7 @@ XMLFilter::XMLFilter(const std::string& name, bool readOnly) :
 }
 
 // Test visibility of an item against all rules
-bool XMLFilter::isVisible(const FilterRule::Type type, const std::string& name) const
+bool SceneFilter::isVisible(const FilterRule::Type type, const std::string& name) const
 {
 	// Iterate over the rules in this filter, checking if each one is a rule for
 	// the chosen item. If so, test the match expression and retrieve the visibility
@@ -50,7 +50,7 @@ bool XMLFilter::isVisible(const FilterRule::Type type, const std::string& name) 
 	return visible;
 }
 
-bool XMLFilter::isEntityVisible(const FilterRule::Type type, const Entity& entity) const
+bool SceneFilter::isEntityVisible(const FilterRule::Type type, const Entity& entity) const
 {
 	bool visible = true; // default if unmodified by rules
 
@@ -88,16 +88,16 @@ bool XMLFilter::isEntityVisible(const FilterRule::Type type, const Entity& entit
 	return visible;
 }
 
-const std::string& XMLFilter::getEventName() const {
+const std::string& SceneFilter::getEventName() const {
 	return _eventName;
 }
 
-const std::string& XMLFilter::getName() const
+const std::string& SceneFilter::getName() const
 {
 	return _name;
 }
 
-void XMLFilter::setName(const std::string& newName) {
+void SceneFilter::setName(const std::string& newName) {
 	// Set the name ...
 	_name = newName;
 
@@ -105,20 +105,20 @@ void XMLFilter::setName(const std::string& newName) {
 	updateEventName();
 }
 
-bool XMLFilter::isReadOnly() const {
+bool SceneFilter::isReadOnly() const {
 	return _readonly;
 }
 
-const FilterRules& XMLFilter::getRuleSet() const
+const FilterRules& SceneFilter::getRuleSet() const
 {
 	return _rules;
 }
 
-void XMLFilter::setRules(const FilterRules& rules) {
+void SceneFilter::setRules(const FilterRules& rules) {
 	_rules = rules;
 }
 
-void XMLFilter::updateEventName() {
+void SceneFilter::updateEventName() {
 	// Construct the eventname out of the filtername (strip the spaces and add "Filter" prefix)
 	_eventName = _name;
 
