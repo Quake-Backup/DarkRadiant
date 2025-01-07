@@ -52,12 +52,14 @@ private:
 
 	void setFilterStateCmd(const cmd::ArgumentList& args);
 	void toggleFilterStateCmd(const cmd::ArgumentList& args);
-	void setAllFilterStatesCmd(const cmd::ArgumentList& args);
 
 	void selectObjectsByFilterCmd(const cmd::ArgumentList& args);
 	void deselectObjectsByFilterCmd(const cmd::ArgumentList& args);
 
 	void setObjectSelectionByFilter(const std::string& filterName, bool select);
+
+	// Activates or deactivates all known filters.
+	void setAllFilterStates(bool state);
 
 public:
     // FilterSystem implementation
@@ -103,9 +105,6 @@ public:
 
 	// Applies the ruleset and replaces the previous one for a given filter.
 	bool setFilterRules(const std::string& filter, const FilterRules& ruleSet) override;
-
-	// Activates or deactivates all known filters.
-	void setAllFilterStates(bool state) override;
 
 	// RegisterableModule implementation
 	const std::string& getName() const override;

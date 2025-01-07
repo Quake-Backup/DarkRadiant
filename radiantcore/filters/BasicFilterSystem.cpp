@@ -2,7 +2,7 @@
 
 #include <functional>
 
-#include "iradiant.h"
+#include "icommandsystem.h"
 #include "itextstream.h"
 #include "iscenegraph.h"
 #include "iregistry.h"
@@ -52,18 +52,6 @@ void BasicFilterSystem::setAllFilterStates(bool state)
 
 	// Trigger an immediate scene redraw
 	GlobalSceneGraph().sceneChanged();
-}
-
-void BasicFilterSystem::setAllFilterStatesCmd(const cmd::ArgumentList& args)
-{
-	if (args.size() != 1)
-	{
-		rMessage() << "Usage: SetAllFilterStates 1|0" << std::endl;
-		rMessage() << " an argument value of 1 activates all filters, 0 deactivates them." << std::endl;
-		return;
-	}
-
-	setAllFilterStates(args.front().getInt() != 0);
 }
 
 void BasicFilterSystem::setFilterStateCmd(const cmd::ArgumentList& args)
@@ -165,10 +153,6 @@ void BasicFilterSystem::initialiseModule(const IApplicationContext& ctx)
 	// user-defined filters
 	addFiltersFromXML(userFilters, false);
 
-	// Add the (de-)activate all commands
-	GlobalCommandSystem().addCommand("SetAllFilterStates",
-		std::bind(&BasicFilterSystem::setAllFilterStatesCmd, this, std::placeholders::_1), { cmd::ARGTYPE_INT });
-
 	// Command to activate/deactivate a named filter
 	GlobalCommandSystem().addCommand("SetFilterState",
 		std::bind(&BasicFilterSystem::setFilterStateCmd, this, std::placeholders::_1),
@@ -179,9 +163,13 @@ void BasicFilterSystem::initialiseModule(const IApplicationContext& ctx)
 		std::bind(&BasicFilterSystem::toggleFilterStateCmd, this, std::placeholders::_1),
 		{ cmd::ARGTYPE_STRING });
 
-	// Register two shortcuts
-	GlobalCommandSystem().addStatement("ActivateAllFilters", "SetAllFilterStates 1", false);
-	GlobalCommandSystem().addStatement("DeactivateAllFilters", "SetAllFilterStates 0", false);
+	// Shortcuts to enable/disable all filters
+    GlobalCommandSystem().addCommand(
+		"ActivateAllFilters", [=](const cmd::ArgumentList&) { setAllFilterStates(true); }
+	);
+    GlobalCommandSystem().addCommand(
+		"DeactivateAllFilters", [=](const cmd::ArgumentList&) { setAllFilterStates(false); }
+	);
 
 	GlobalCommandSystem().addCommand(SELECT_OBJECTS_BY_FILTER_CMD,
 		std::bind(&BasicFilterSystem::selectObjectsByFilterCmd, this, std::placeholders::_1), { cmd::ARGTYPE_STRING });
