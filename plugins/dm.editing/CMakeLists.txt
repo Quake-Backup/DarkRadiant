@@ -17,5 +17,5 @@ add_library(dm_editing MODULE
 target_compile_options(dm_editing PUBLIC ${SIGC_CFLAGS})
 target_link_libraries(dm_editing PUBLIC wxutil)
 set_target_properties(
-    dm_editing PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${DR_STAGING_MODULESDIR}"
+    dm_editing PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${DR_STAGING_PLUGINSDIR}"
 )

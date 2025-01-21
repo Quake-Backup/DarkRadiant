@@ -17,7 +17,7 @@ add_library(dm_stimresponse MODULE
             StimTypes.cpp)
 target_link_libraries(dm_stimresponse PUBLIC wxutil)
 set_target_properties(
-    dm_stimresponse PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${DR_STAGING_MODULESDIR}"
+    dm_stimresponse PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${DR_STAGING_PLUGINSDIR}"
 )
 
 

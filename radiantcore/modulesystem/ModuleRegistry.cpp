@@ -117,7 +117,16 @@ void ModuleRegistry::initialiseModuleRecursive(const std::string& name)
 	// Initialise the dependencies first
 	for (const std::string& namedDependency : dependencies)
 	{
-        initialiseModuleRecursive(namedDependency);
+        try {
+            initialiseModuleRecursive(namedDependency);
+        }
+        catch (const std::logic_error& e) {
+            // Rethrow with more information (both the dependency and the dependent module)
+            throw std::logic_error(
+                "ModuleRegistry: failed to initialise dependency '" + namedDependency
+                + "' of module '" + name + "' [" + e.what() + "]"
+            );
+        }
 	}
 
 	_progress = 0.1f + (static_cast<float>(_initialisedModules.size())/_uninitialisedModules.size())*0.9f;

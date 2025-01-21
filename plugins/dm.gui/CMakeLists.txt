@@ -18,5 +18,5 @@ add_library(dm_gui MODULE
 target_compile_options(dm_gui PUBLIC ${SIGC_CFLAGS})
 target_link_libraries(dm_gui PUBLIC wxutil)
 set_target_properties(
-    dm_gui PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${DR_STAGING_MODULESDIR}"
+    dm_gui PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${DR_STAGING_PLUGINSDIR}"
 )
