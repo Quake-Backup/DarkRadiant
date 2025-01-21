@@ -408,7 +408,15 @@ namespace module
 				acquireReference();
 			}
 
-			return *_instancePtr;
+            // If the module is still null this is unrecoverable
+            if (!_instancePtr) {
+                throw std::logic_error(
+                    "InstanceReference: module " + std::string(_moduleName) + " not found"
+                );
+            }
+            else {
+                return *_instancePtr;
+            }
 		}
 
 	private:
