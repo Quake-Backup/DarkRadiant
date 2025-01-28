@@ -1121,7 +1121,10 @@ TEST_F(OrthoViewSelectionTest, DragManipulateEntityByPlaneEntityMode)
 
     // Drag starting from the right side of the bounding box
     auto originalAABB = light->worldAABB();
-    performDragOperation(originalAABB.getOrigin() + Vector3(originalAABB.getExtents().x(), 0, 0) + 20);
+    performDragOperation(
+        originalAABB.getOrigin() + Vector3(originalAABB.getExtents().x(), 0, 0)
+        + Vector3(20, 20, 20)
+    );
 
     if (registry::getValue<bool>(RKEY_DRAG_RESIZE_SYMMETRICALLY))
     {
