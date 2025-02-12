@@ -206,35 +206,35 @@ void FilterEditor::createCriteriaPanel()
     deleteRuleButton->Bind(wxEVT_BUTTON, &FilterEditor::onDeleteRule, this);
 }
 
-std::string FilterEditor::getStringForType(const FilterRule::Type type)
+std::string FilterEditor::getStringForType(const FilterType type)
 {
     switch (type)
     {
-    case FilterRule::TYPE_TEXTURE: return "texture";
-    case FilterRule::TYPE_OBJECT: return "object";
-    case FilterRule::TYPE_ENTITYCLASS: return "entityclass";
-    case FilterRule::TYPE_ENTITYKEYVALUE: return "entitykeyvalue";
+    case FilterType::TEXTURE: return "texture";
+    case FilterType::OBJECT: return "object";
+    case FilterType::ECLASS: return "entityclass";
+    case FilterType::SPAWNARG: return "entitykeyvalue";
     default: return "";
     };
 }
 
-FilterRule::Type FilterEditor::getTypeForString(const std::string& typeStr)
+FilterType FilterEditor::getTypeForString(const std::string& typeStr)
 {
     if (typeStr == "texture")
     {
-        return FilterRule::TYPE_TEXTURE;
+        return FilterType::TEXTURE;
     }
     else if (typeStr == "object")
     {
-        return FilterRule::TYPE_OBJECT;
+        return FilterType::OBJECT;
     }
     else if (typeStr == "entityclass")
     {
-        return FilterRule::TYPE_ENTITYCLASS;
+        return FilterType::ECLASS;
     }
     else // "entitykeyvalue"
     {
-        return FilterRule::TYPE_ENTITYKEYVALUE;
+        return FilterType::SPAWNARG;
     }
 }
 
@@ -333,7 +333,7 @@ void FilterEditor::onItemEdited(wxDataViewEvent& ev)
     else if (col == TYPE_STRING)
     {
         // Look up the type index for "new_text"
-        FilterRule::Type type = getTypeForString(std::string(value.GetString()));
+        FilterType type = getTypeForString(std::string(value.GetString()));
         _filter.rules[ruleIndex].type = type;
     }
     else if (col == SHOWHIDE)
@@ -370,7 +370,7 @@ void FilterEditor::onRuleSelectionChanged(wxDataViewEvent& ev)
 
 void FilterEditor::onAddRule(wxCommandEvent& ev)
 {
-    FilterRule newRule = FilterRule::Create(FilterRule::TYPE_TEXTURE, GlobalTexturePrefix_get(), false);
+    FilterRule newRule = FilterRule::Create(FilterType::TEXTURE, GlobalTexturePrefix_get(), false);
     _filter.rules.push_back(newRule);
 
     update();

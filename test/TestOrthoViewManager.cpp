@@ -1,5 +1,7 @@
 #include "TestOrthoViewManager.h"
 
+#include "math/Vector3.h"
+
 namespace test
 {
 

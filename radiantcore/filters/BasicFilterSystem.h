@@ -83,10 +83,10 @@ public:
 	void setFilterState(const std::string& filter, bool state) override;
 
 	// Query whether an item is visible or filtered out
-	bool isVisible(const FilterRule::Type type, const std::string& name) override;
+	bool isVisible(const FilterType type, const std::string& name) override;
 
 	// Query whether an entity is visible or filtered out
-	bool isEntityVisible(const FilterRule::Type type, const Entity& entity) override;
+	bool isEntityVisible(const FilterType type, const Entity& entity) override;
 
 	// Whether this filter is read-only and can't be changed
 	bool filterIsReadOnly(const std::string& filter) override;

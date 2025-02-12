@@ -36,8 +36,8 @@ public:
 		{
 			Entity* entity = Node_getEntity(node);
 
-			bool isVisible = _filter.isEntityVisible(FilterRule::TYPE_ENTITYCLASS, *entity) &&
-				_filter.isEntityVisible(FilterRule::TYPE_ENTITYKEYVALUE, *entity);
+			bool isVisible = _filter.isEntityVisible(FilterType::ECLASS, *entity) &&
+				_filter.isEntityVisible(FilterType::SPAWNARG, *entity);
 
 			if (!isVisible)
 			{
@@ -53,7 +53,7 @@ public:
 		if (Node_isPatch(node))
 		{
 			// Check by object type "patch" and by the patch's material
-			bool isVisible = _filter.isVisible(FilterRule::TYPE_OBJECT, "patch") &&
+			bool isVisible = _filter.isVisible(FilterType::OBJECT, "patch") &&
 				materialIsVisible(Node_getIPatch(node)->getShader());
 
 			if (!isVisible)
@@ -66,7 +66,7 @@ public:
 		else if (Node_isBrush(node))
 		{
 			// Check by object type "brush" and by the brush materials
-			bool isVisible = _filter.isVisible(FilterRule::TYPE_OBJECT, "brush") &&
+			bool isVisible = _filter.isVisible(FilterType::OBJECT, "brush") &&
 				allBrushMaterialsVisible(Node_getIBrush(node));
 
 			if (!isVisible)
@@ -83,7 +83,7 @@ public:
 private:
 	bool materialIsVisible(const std::string& materialName)
 	{
-		return _filter.isVisible(FilterRule::TYPE_TEXTURE, materialName);
+		return _filter.isVisible(FilterType::TEXTURE, materialName);
 	}
 
 	bool allBrushMaterialsVisible(IBrush* brush)

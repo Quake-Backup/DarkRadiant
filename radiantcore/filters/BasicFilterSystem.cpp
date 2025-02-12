@@ -210,15 +210,15 @@ void BasicFilterSystem::addFiltersFromXML(const xml::NodeList& nodes, bool readO
 
 			if (typeStr == "texture")
 			{
-				filter->addRule(FilterRule::TYPE_TEXTURE, match, show);
+				filter->addRule(FilterType::TEXTURE, match, show);
 			}
 			else if (typeStr == "entityclass")
 			{
-				filter->addRule(FilterRule::TYPE_ENTITYCLASS, match, show);
+				filter->addRule(FilterType::ECLASS, match, show);
 			}
 			else if (typeStr == "object")
 			{
-				filter->addRule(FilterRule::TYPE_OBJECT, match, show);
+				filter->addRule(FilterType::OBJECT, match, show);
 			}
 			else if (typeStr == "entitykeyvalue")
 			{
@@ -295,10 +295,10 @@ void BasicFilterSystem::shutdownModule()
 
 			switch (rule.type)
 			{
-			case FilterRule::TYPE_TEXTURE: typeStr = "texture"; break;
-			case FilterRule::TYPE_OBJECT: typeStr = "object"; break;
-			case FilterRule::TYPE_ENTITYCLASS: typeStr = "entityclass"; break;
-			case FilterRule::TYPE_ENTITYKEYVALUE:
+			case FilterType::TEXTURE: typeStr = "texture"; break;
+			case FilterType::OBJECT: typeStr = "object"; break;
+			case FilterType::ECLASS: typeStr = "entityclass"; break;
+			case FilterType::SPAWNARG:
 				typeStr = "entitykeyvalue";
 				criterion.setAttributeValue("key", rule.entityKey);
 				break;
@@ -524,7 +524,7 @@ bool BasicFilterSystem::renameFilter(const std::string& oldFilterName, const std
 }
 
 // Query whether an item is visible or filtered out
-bool BasicFilterSystem::isVisible(const FilterRule::Type type, const std::string& name)
+bool BasicFilterSystem::isVisible(const FilterType type, const std::string& name)
 {
 	// Check if this item is in the visibility cache, returning
 	// its cached value if found
@@ -557,7 +557,7 @@ bool BasicFilterSystem::isVisible(const FilterRule::Type type, const std::string
 	return visFlag;
 }
 
-bool BasicFilterSystem::isEntityVisible(const FilterRule::Type type, const Entity& entity)
+bool BasicFilterSystem::isEntityVisible(const FilterType type, const Entity& entity)
 {
 	// Otherwise, walk the list of active filters to find a value for
 	// this item.
@@ -637,7 +637,7 @@ void BasicFilterSystem::updateShaders()
     {
         // Set the shader's visibility based on the current filter settings
         material->setVisible(
-            isVisible(FilterRule::TYPE_TEXTURE, material->getName())
+            isVisible(FilterType::TEXTURE, material->getName())
         );
     });
 }

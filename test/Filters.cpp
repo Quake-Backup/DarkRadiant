@@ -1,6 +1,7 @@
 #include "RadiantTest.h"
 
 #include "ifilter.h"
+#include "scene/EntityNode.h"
 #include "scene/Node.h"
 #include "imap.h"
 #include "scene/filters/SceneFilter.h"
@@ -9,8 +10,7 @@
 namespace test
 {
 
-class DummyNode :
-    public scene::Node
+class DummyNode: public scene::Node
 {
 public:
     DummyNode()
@@ -63,6 +63,29 @@ TEST_F(FilterTest, RenameSceneFilter)
     f.setName("AdjustedName");
     EXPECT_EQ(f.getName(), "AdjustedName");
     EXPECT_EQ(f.getEventName(), "FilterAdjustedName");
+}
+
+TEST_F(FilterTest, FilterRules)
+{
+    // Texture-based filtering
+    filters::SceneFilter filter("HideStuff", false);
+    filter.addRule(FilterType::TEXTURE, "textures/darkmod/badtex", false);
+
+    EXPECT_TRUE(filter.isVisible(FilterType::TEXTURE, "textures/darkmod/good"));
+    EXPECT_FALSE(filter.isVisible(FilterType::TEXTURE, "textures/darkmod/badtex"));
+    EXPECT_TRUE(filter.isVisible(FilterType::ECLASS, "textures/darkmod/badtex"));
+    EXPECT_TRUE(filter.isVisible(FilterType::TEXTURE, "textures/darkmod/badtex1"));
+
+    // Entity class filtering
+    scene::INodePtr worldNode = GlobalMapModule().findOrInsertWorldspawn();
+    Entity* worldEnt = Node_getEntity(worldNode);
+    ASSERT_TRUE(worldEnt);
+
+    filter.addRule(FilterType::ECLASS, "func_static", false);
+    EXPECT_TRUE(filter.isEntityVisible(FilterType::ECLASS, *worldEnt));
+
+    filter.addRule(FilterType::ECLASS, "worldspawn", false);
+    EXPECT_FALSE(filter.isEntityVisible(FilterType::ECLASS, *worldEnt));
 }
 
 TEST_F(FilterTest, OnFiltersChangedInvoked)

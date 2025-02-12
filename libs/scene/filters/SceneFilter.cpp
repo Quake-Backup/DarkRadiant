@@ -10,104 +10,90 @@ namespace filters
 {
 
 SceneFilter::SceneFilter(const std::string& name, bool readOnly) :
-	_name(name),
-	_readonly(readOnly)
+    _name(name),
+    _readonly(readOnly)
 {
-	updateEventName();
+    updateEventName();
 }
 
 // Test visibility of an item against all rules
-bool SceneFilter::isVisible(const FilterRule::Type type, const std::string& name) const
+bool SceneFilter::isVisible(const FilterType type, const std::string& name) const
 {
-	// Iterate over the rules in this filter, checking if each one is a rule for
-	// the chosen item. If so, test the match expression and retrieve the visibility
-	// flag if there is a match.
+    // Iterate over the rules in this filter, checking if each one is a rule for
+    // the chosen item. If so, test the match expression and retrieve the visibility
+    // flag if there is a match.
 
-	bool visible = true; // default if unmodified by rules
+    bool visible = true; // default if unmodified by rules
 
-	for (FilterRules::const_iterator ruleIter = _rules.begin();
-		 ruleIter != _rules.end();
-		 ++ruleIter)
-	{
-		// Check the item type.
-		if (ruleIter->type != type)
-		{
-			continue;
-		}
+    for (const FilterRule& rule: _rules)
+    {
+        // Check the item type.
+        if (rule.type != type)
+            continue;
 
-		// If we have a rule for this item, use a regex to match the query name
-		// against the "match" parameter
-		std::regex ex(ruleIter->match);
+        // If we have a rule for this item, use a regex to match the query name
+        // against the "match" parameter
+        if (const std::regex ex(rule.match); std::regex_match(name, ex))
+        {
+            // Overwrite the visible flag with the value from the rule.
+            visible = rule.show;
+        }
+    }
 
-		if (std::regex_match(name, ex))
-		{
-			// Overwrite the visible flag with the value from the rule.
-			visible = ruleIter->show;
-		}
-	}
-
-	// Pass back the current visibility value
-	return visible;
+    // Pass back the current visibility value
+    return visible;
 }
 
-bool SceneFilter::isEntityVisible(const FilterRule::Type type, const Entity& entity) const
+bool SceneFilter::isEntityVisible(const FilterType type, const Entity& entity) const
 {
-	bool visible = true; // default if unmodified by rules
+    bool visible = true; // default if unmodified by rules
 
-	IEntityClassConstPtr eclass = entity.getEntityClass();
+    for (const FilterRule& rule: _rules)
+    {
+        if (rule.type != type)
+            continue;
 
-	for (FilterRules::const_iterator ruleIter = _rules.begin();
-		 ruleIter != _rules.end();
-		 ++ruleIter)
-	{
-		if (ruleIter->type != type)
-		{
-			continue;
-		}
+        if (type == FilterType::ECLASS)
+        {
+            IEntityClassConstPtr eclass = entity.getEntityClass();
+            if (const std::regex ex(rule.match); std::regex_match(eclass->getDeclName(), ex))
+            {
+                visible = rule.show;
+            }
+        }
+        else if (type == FilterType::SPAWNARG)
+        {
+            if (const std::regex ex(rule.match);
+                std::regex_match(entity.getKeyValue(rule.entityKey), ex))
+            {
+                visible = rule.show;
+            }
+        }
+    }
 
-		if (type == FilterRule::TYPE_ENTITYCLASS)
-		{
-			std::regex ex(ruleIter->match);
-
-			if (std::regex_match(eclass->getDeclName(), ex))
-			{
-				visible = ruleIter->show;
-			}
-		}
-		else if (type == FilterRule::TYPE_ENTITYKEYVALUE)
-		{
-			std::regex ex(ruleIter->match);
-
-			if (std::regex_match(entity.getKeyValue(ruleIter->entityKey), ex))
-			{
-				visible = ruleIter->show;
-			}
-		}
-	}
-
-	return visible;
+    return visible;
 }
 
 void SceneFilter::setName(const std::string& newName) {
-	// Set the name ...
-	_name = newName;
+    // Set the name ...
+    _name = newName;
 
-	// ...and update the event name
-	updateEventName();
+    // ...and update the event name
+    updateEventName();
 }
 
 void SceneFilter::setRules(const FilterRules& rules) {
-	_rules = rules;
+    _rules = rules;
 }
 
 void SceneFilter::updateEventName() {
-	// Construct the eventname out of the filtername (strip the spaces and add "Filter" prefix)
-	_eventName = _name;
+    // Construct the eventname out of the filtername (strip the spaces and add "Filter" prefix)
+    _eventName = _name;
 
-	// Strip all spaces from the string
-	_eventName.erase(std::remove(_eventName.begin(), _eventName.end(), ' '), _eventName.end());
+    // Strip all spaces from the string
+    _eventName.erase(std::remove(_eventName.begin(), _eventName.end(), ' '), _eventName.end());
 
-	_eventName = "Filter" + _eventName;
+    _eventName = "Filter" + _eventName;
 }
 
 } // namespace filters

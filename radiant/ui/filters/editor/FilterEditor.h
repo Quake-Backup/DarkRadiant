@@ -47,8 +47,8 @@ private:
 	void createCriteriaPanel();
 
 	// Converts the given enum into a string "entityclass", "object"
-	std::string getStringForType(const FilterRule::Type type);
-	FilterRule::Type getTypeForString(const std::string& typeStr);
+	std::string getStringForType(const FilterType type);
+	FilterType getTypeForString(const std::string& typeStr);
 
 	void onSave(wxCommandEvent& ev);
 	void onCancel(wxCommandEvent& ev);
