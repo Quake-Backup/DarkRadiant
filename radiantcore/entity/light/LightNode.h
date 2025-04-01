@@ -4,6 +4,7 @@
 #include "Renderables.h"
 #include "LightShader.h"
 
+#include "generic/callback.h"
 #include "ilightnode.h"
 #include "registry/CachedKey.h"
 #include "scene/TransformedCopy.h"
@@ -11,7 +12,6 @@
 #include "editable.h"
 
 #include "dragplanes.h"
-#include "../VertexInstance.h"
 #include "scene/EntityNode.h"
 #include "scene/OriginKey.h"
 #include "../RotationKey.h"

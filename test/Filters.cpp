@@ -1,7 +1,6 @@
 #include "RadiantTest.h"
 
 #include "ifilter.h"
-#include "scene/EntityNode.h"
 #include "scene/Node.h"
 #include "imap.h"
 #include "scene/filters/SceneFilter.h"

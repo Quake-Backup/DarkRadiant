@@ -1,7 +1,6 @@
 #include "LightNode.h"
 
 #include "igrid.h"
-#include "ishaders.h"
 #include "icolourscheme.h"
 #include "scene/EntitySettings.h"
 #include "entitylib.h"
