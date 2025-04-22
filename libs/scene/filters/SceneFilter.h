@@ -1,7 +1,11 @@
 #pragma once
 
+#include "FilterRule.h"
+
 #include <string>
-#include "ifilter.h"
+#include <memory>
+
+class Entity;
 
 namespace filters
 {

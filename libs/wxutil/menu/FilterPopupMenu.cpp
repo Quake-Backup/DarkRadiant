@@ -9,14 +9,14 @@ namespace wxutil
 FilterPopupMenu::FilterPopupMenu()
 {
     // Visit the filters in the FilterSystem to populate the menu
-    GlobalFilterSystem().forEachFilter([=](const std::string& name) {
+    GlobalFilterSystem().forEachFilter([=](const filters::SceneFilter& f) {
         // Allocate an ID for this filter
         const int menuItemID = _filterItems.size();
-        _filterItems.push_back(name);
+        _filterItems.push_back(f.getName());
 
         // Add a checkable menu item, initialised with the current filter state
-        auto* item = AppendCheckItem(menuItemID, name);
-        item->Check(GlobalFilterSystem().getFilterState(name));
+        auto* item = AppendCheckItem(menuItemID, f.getName());
+        item->Check(GlobalFilterSystem().getFilterState(f.getName()));
         Bind(wxEVT_MENU, &FilterPopupMenu::menuItemToggled, this, menuItemID);
     });
 }

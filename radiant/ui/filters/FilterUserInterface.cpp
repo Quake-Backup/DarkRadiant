@@ -90,8 +90,9 @@ void FilterUserInterface::refreshFilterToggles()
 	_toggleFilterEvents.clear();
 
 	// Create a Toggle item such that menu items can bind to it
-	GlobalFilterSystem().forEachFilter([&](const std::string& name)
+	GlobalFilterSystem().forEachFilter([&](const filters::SceneFilter& f)
 	{
+        const auto name = f.getName();
 		auto eventName = GlobalFilterSystem().getFilterEventName(name);
 		auto toggleEvent = GlobalEventManager().addToggle(
 			eventName,

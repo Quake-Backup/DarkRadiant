@@ -88,10 +88,12 @@ TEST_F(FilterTest, FilterRules)
 
 TEST_F(FilterTest, FiltersLoadedFromGameXML)
 {
+    bool allReadOnly = true;
     std::set<std::string> filterNames;
-    GlobalFilterSystem().forEachFilter([&filterNames](const std::string& fname) {
-        filterNames.insert(fname); }
-    );
+    GlobalFilterSystem().forEachFilter([&](const filters::SceneFilter& f) {
+        filterNames.insert(f.getName());
+        allReadOnly &= f.isReadOnly();
+    });
 
     static const std::set<std::string> EXPECTED_FILTERS{
         "All entities",
@@ -115,10 +117,10 @@ TEST_F(FilterTest, FiltersLoadedFromGameXML)
         "World geometry"
     };
     EXPECT_EQ(filterNames, EXPECTED_FILTERS);
+    EXPECT_TRUE(allReadOnly) << "All filters should be read-only";
 
     // Filters in the game file are read only and inactive by default
     for (const std::string name: EXPECTED_FILTERS) {
-        EXPECT_TRUE(GlobalFilterSystem().filterIsReadOnly(name));
         EXPECT_FALSE(GlobalFilterSystem().getFilterState(name));
     }
 
