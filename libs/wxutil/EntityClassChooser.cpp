@@ -76,7 +76,7 @@ public:
     }
 
     // EntityClassVisitor implementation
-    void visit(const IEntityClassPtr& eclass) override
+    void visit(const scene::EntityClass::Ptr& eclass) override
     {
         // Skip hidden entity classes
         if (eclass->getVisibility() == vfs::Visibility::HIDDEN)
@@ -185,7 +185,7 @@ public:
 
     void SetPreviewDeclName(const std::string& declName) override
     {
-        // Lookup the IEntityClass instance
+        // Lookup the scene::EntityClass instance
         auto eclass = GlobalEntityClassManager().findClass(declName);
         _textCtrl->SetValue(eclass ? eclass::getUsage(eclass) : "");
 

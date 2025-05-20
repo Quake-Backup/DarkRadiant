@@ -46,7 +46,7 @@ class EntityNode: public IRenderEntity,
 {
 protected:
 	// The entity class
-	IEntityClassPtr _eclass;
+	scene::EntityClass::Ptr _eclass;
 
 	// The actual entity (which contains the key/value pairs)
 	Entity _spawnArgs;
@@ -121,7 +121,7 @@ protected:
 
 protected:
 	// The Constructor needs the eclass
-	EntityNode(const IEntityClassPtr& eclass);
+	EntityNode(const scene::EntityClass::Ptr& eclass);
 
 	// Copy constructor
 	EntityNode(const EntityNode& other);

@@ -15,7 +15,7 @@ std::string LightShader::m_defaultShader = "";
 
 // --------- LightNode implementation ------------------------------------
 
-LightNode::LightNode(const IEntityClassPtr& eclass)
+LightNode::LightNode(const scene::EntityClass::Ptr& eclass)
 : EntityNode(eclass),
     m_originKey(std::bind(&LightNode::originChanged, this)),
     _originTransformed(ORIGINKEY_IDENTITY),
@@ -55,7 +55,7 @@ LightNode::LightNode(const LightNode& other)
     m_doom3Radius.m_changed = std::bind(&LightNode::onLightRadiusChanged, this);
 }
 
-LightNodePtr LightNode::Create(const IEntityClassPtr& eclass)
+LightNodePtr LightNode::Create(const scene::EntityClass::Ptr& eclass)
 {
 	LightNodePtr instance(new LightNode(eclass));
 	instance->construct();

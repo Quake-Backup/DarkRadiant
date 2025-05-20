@@ -7,7 +7,7 @@
 namespace entity
 {
 
-GenericEntityNode::GenericEntityNode(const IEntityClassPtr& eclass) :
+GenericEntityNode::GenericEntityNode(const scene::EntityClass::Ptr& eclass) :
     EntityNode(eclass),
     m_originKey(std::bind(&GenericEntityNode::originChanged, this)),
     m_origin(ORIGINKEY_IDENTITY),
@@ -34,7 +34,7 @@ GenericEntityNode::GenericEntityNode(const GenericEntityNode& other) :
     _3DdirectionUsesUp(other._eclass->isOfType("func_emitter") || other._eclass->isOfType("func_splat"))
 {}
 
-std::shared_ptr<GenericEntityNode> GenericEntityNode::Create(const IEntityClassPtr& eclass)
+std::shared_ptr<GenericEntityNode> GenericEntityNode::Create(const scene::EntityClass::Ptr& eclass)
 {
     auto instance = std::make_shared<GenericEntityNode>(eclass);
     instance->construct();

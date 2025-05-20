@@ -26,7 +26,6 @@ add_library(radiantcore MODULE
             decl/DeclarationFolderParser.cpp
             decl/DeclarationManager.cpp
             decl/FavouritesManager.cpp
-            eclass/EntityClass.cpp
             eclass/EClassColourManager.cpp
             eclass/EClassManager.cpp
             entity/AngleKey.cpp

@@ -16,7 +16,7 @@ private:
 
 public:
     // EntityCreator implementation
-	EntityNodePtr createEntity(const IEntityClassPtr& eclass) override;
+	EntityNodePtr createEntity(const scene::EntityClass::Ptr& eclass) override;
     ITargetManagerPtr createTargetManager() override;
 	IEntitySettings& getSettings() override;
 

@@ -60,7 +60,7 @@ void AasFileManager::ensureAasTypesLoaded()
     _typesLoaded = true;
     _typeList.clear();
 
-    IEntityClassPtr aasTypesClass = GlobalEntityClassManager().findClass(AAS_TYPES_ENTITYDEF);
+    scene::EntityClass::Ptr aasTypesClass = GlobalEntityClassManager().findClass(AAS_TYPES_ENTITYDEF);
 
     if (aasTypesClass)
     {
@@ -71,7 +71,7 @@ void AasFileManager::ensureAasTypesLoaded()
             AasType type;
             type.entityDefName = attr.getValue();
 
-            IEntityClassPtr aasType = GlobalEntityClassManager().findClass(type.entityDefName);
+            scene::EntityClass::Ptr aasType = GlobalEntityClassManager().findClass(type.entityDefName);
 
             if (!aasType)
             {

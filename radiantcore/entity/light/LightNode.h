@@ -100,13 +100,13 @@ class LightNode :
 	mutable Matrix4 m_projectionOrientation;
 
 public:
-	LightNode(const IEntityClassPtr& eclass);
+	LightNode(const scene::EntityClass::Ptr& eclass);
 
 private:
 	LightNode(const LightNode& other);
 
 public:
-	static LightNodePtr Create(const IEntityClassPtr& eclass);
+	static LightNodePtr Create(const scene::EntityClass::Ptr& eclass);
 
     // ILightNode implementation
     const RendererLight& getRendererLight() const override { return *this; }

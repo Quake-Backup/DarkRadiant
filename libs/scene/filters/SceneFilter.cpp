@@ -1,7 +1,7 @@
 #include "SceneFilter.h"
 
 #include "scene/Entity.h"
-#include "ieclass.h"
+#include "scene/EntityClass.h"
 #include "ifilter.h"
 #include <regex>
 #include <algorithm>
@@ -55,7 +55,7 @@ bool SceneFilter::isEntityVisible(const FilterType type, const Entity& entity) c
 
         if (type == FilterType::ECLASS)
         {
-            IEntityClassConstPtr eclass = entity.getEntityClass();
+            scene::EntityClass::CPtr eclass = entity.getEntityClass();
             if (const std::regex ex(rule.match); std::regex_match(eclass->getDeclName(), ex))
             {
                 visible = rule.show;

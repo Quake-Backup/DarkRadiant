@@ -54,7 +54,7 @@ AABB Doom3Light_getBounds(AABB aabb)
     return aabb;
 }
 
-EntityNodePtr createNodeForEntity(const IEntityClassPtr& eclass)
+EntityNodePtr createNodeForEntity(const scene::EntityClass::Ptr& eclass)
 {
 	// Null entityclass check
 	if (!eclass)
@@ -67,19 +67,19 @@ EntityNodePtr createNodeForEntity(const IEntityClassPtr& eclass)
     // Otherwise create the correct entity subclass based on the entity class parameters.
     switch (eclass->getClassType())
     {
-    case IEntityClass::Type::Light:
+    case scene::EntityClass::Type::Light:
         return LightNode::Create(eclass);
 
-    case IEntityClass::Type::StaticGeometry:
+    case scene::EntityClass::Type::StaticGeometry:
         return StaticGeometryNode::Create(eclass); // Variable size entity
 
-    case IEntityClass::Type::EntityClassModel:
+    case scene::EntityClass::Type::EntityClassModel:
         return EclassModelNode::Create(eclass); // Fixed size, has model path
 
-    case IEntityClass::Type::Speaker:
+    case scene::EntityClass::Type::Speaker:
         return SpeakerNode::create(eclass);
 
-    case IEntityClass::Type::Generic:
+    case scene::EntityClass::Type::Generic:
         return GenericEntityNode::Create(eclass); // Fixed size, no model path
 
 	default:
@@ -88,7 +88,7 @@ EntityNodePtr createNodeForEntity(const IEntityClassPtr& eclass)
     }
 }
 
-EntityNodePtr Doom3EntityModule::createEntity(const IEntityClassPtr& eclass)
+EntityNodePtr Doom3EntityModule::createEntity(const scene::EntityClass::Ptr& eclass)
 {
 	EntityNodePtr node = createNodeForEntity(eclass);
 
@@ -125,7 +125,7 @@ EntityNodePtr Doom3EntityModule::createEntityFromSelection(const std::string& na
     // Obtain the structure containing the selection counts
     const SelectionInfo& info = GlobalSelectionSystem().getSelectionInfo();
 
-    IEntityClassPtr entityClass = GlobalEntityClassManager().findOrInsert(name, true);
+    scene::EntityClass::Ptr entityClass = GlobalEntityClassManager().findOrInsert(name, true);
 
     // TODO: to be replaced by inheritance-based class detection
     bool isModel = (info.totalCount == 0 && name == "func_static");

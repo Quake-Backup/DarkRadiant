@@ -36,7 +36,7 @@ public:
 
 		if (entity != nullptr)
 		{
-			IEntityClassConstPtr eclass = entity->getEntityClass();
+			scene::EntityClass::CPtr eclass = entity->getEntityClass();
 			std::string ecName = eclass->getDeclName();
 
 			auto found = _map.find(ecName);

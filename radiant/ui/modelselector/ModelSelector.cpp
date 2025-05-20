@@ -2,7 +2,7 @@
 
 #include "ifilesystem.h"
 #include "itextstream.h"
-#include "ieclass.h"
+#include "scene/EntityClass.h"
 #include "ui/imainframe.h"
 #include "imodelcache.h"
 #include "imodel.h"
@@ -376,7 +376,7 @@ void ModelSelector::onModelLoaded(const model::ModelNodePtr& modelNode)
     wxDataViewItem matchingItem;
 
     // Find related entity classes
-    GlobalEntityClassManager().forEachEntityClass([&] (const IEntityClassPtr& eclass)
+    GlobalEntityClassManager().forEachEntityClass([&] (const scene::EntityClass::Ptr& eclass)
     {
         auto modelKeyValue = eclass->getAttributeValue("model", true);
 

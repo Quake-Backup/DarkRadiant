@@ -71,7 +71,7 @@ inline scene::INodePtr changeEntityClassname(const scene::INodePtr& node,
 	scene::INodePtr oldNode(node);
 
 	// greebo: First, get the eclass
-	IEntityClassPtr eclass = GlobalEntityClassManager().findOrInsert(
+	scene::EntityClass::Ptr eclass = GlobalEntityClassManager().findOrInsert(
 		classname,
 		scene::hasChildPrimitives(oldNode) // whether this entity has child primitives
 	);

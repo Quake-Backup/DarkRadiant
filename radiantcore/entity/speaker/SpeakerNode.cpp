@@ -15,7 +15,7 @@ namespace
     const std::string KEY_S_SHADER("s_shader");
 }
 
-SpeakerNode::SpeakerNode(const IEntityClassPtr& eclass) :
+SpeakerNode::SpeakerNode(const scene::EntityClass::Ptr& eclass) :
     EntityNode(eclass),
     m_originKey(std::bind(&SpeakerNode::originChanged, this)),
     _renderableBox(*this, &m_aabb_local, worldAABB().getOrigin()),
@@ -38,7 +38,7 @@ SpeakerNode::SpeakerNode(const SpeakerNode& other) :
     _dragPlanes(std::bind(&SpeakerNode::selectedChangedComponent, this, std::placeholders::_1))
 {}
 
-std::shared_ptr<SpeakerNode> SpeakerNode::create(const IEntityClassPtr& eclass)
+std::shared_ptr<SpeakerNode> SpeakerNode::create(const scene::EntityClass::Ptr& eclass)
 {
     SpeakerNodePtr speaker(new SpeakerNode(eclass));
     speaker->construct();

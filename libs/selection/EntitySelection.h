@@ -144,11 +144,11 @@ public:
     }
 
     // Returns non-empty reference if all selected entities share the same eclass
-    IEntityClassPtr getSingleSharedEntityClass()
+    scene::EntityClass::Ptr getSingleSharedEntityClass()
     {
         try
         {
-            IEntityClassPtr result;
+            scene::EntityClass::Ptr result;
 
             foreachEntity([&](const EntityNodePtr& entityNode)
             {

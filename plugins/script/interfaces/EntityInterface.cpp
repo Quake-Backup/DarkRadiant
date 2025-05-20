@@ -38,7 +38,7 @@ bool ScriptEntityNode::isInherited(const std::string& key) {
 
 ScriptEntityClass ScriptEntityNode::getEntityClass() {
 	Entity* entity = static_cast<scene::INodePtr>(*this)->tryGetEntity();
-	return ScriptEntityClass(entity != NULL ? entity->getEntityClass() : IEntityClassPtr());
+	return ScriptEntityClass(entity != NULL ? entity->getEntityClass() : scene::EntityClass::Ptr());
 }
 
 bool ScriptEntityNode::isModel() {
@@ -103,7 +103,7 @@ ScriptSceneNode EntityInterface::createEntity(const ScriptEntityClass& eclass)
 // Creates a new entity for the given entityclass
 ScriptSceneNode EntityInterface::createEntity(const std::string& eclassName) {
 	// Find the eclass
-	IEntityClassPtr eclass = GlobalEntityClassManager().findClass(eclassName);
+	scene::EntityClass::Ptr eclass = GlobalEntityClassManager().findClass(eclassName);
 
 	if (eclass == NULL) {
 		rMessage() << "Could not find entity class: " << eclassName << std::endl;

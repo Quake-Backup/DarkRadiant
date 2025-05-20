@@ -89,7 +89,7 @@ TEST_F(EntityTest, CreateBasicLightEntity)
     auto clsName = light->getEntity().getKeyValue("classname");
     EXPECT_EQ(clsName, "light");
 
-    // Entity should have an IEntityClass pointer which matches the one we
+    // Entity should have an scene::EntityClass pointer which matches the one we
     // looked up
     EXPECT_EQ(light->getEntity().getEntityClass().get(), lightCls.get());
 

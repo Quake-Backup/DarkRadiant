@@ -3,6 +3,7 @@ add_library(scene
             ChildPrimitives.cpp
             InstanceWalkers.cpp
             Entity.cpp
+            EntityClass.cpp
             EntityKeyValue.cpp
             EntityNode.cpp
             EntitySettings.cpp
