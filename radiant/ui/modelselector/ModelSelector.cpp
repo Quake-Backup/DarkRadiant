@@ -368,7 +368,7 @@ void ModelSelector::onModelLoaded(const model::ModelNodePtr& modelNode)
     // Model name doesn't have a folder, this could be a modelDef
     if (auto modelDef = GlobalEntityClassManager().findModel(modelName); modelDef)
     {
-        _infoTable->Append(_("Defined in"), modelDef->getBlockSyntax().fileInfo.fullPath());
+        _infoTable->Append(_("Defined in"), modelDef->getDeclSource().fileInfo.fullPath());
     }
 
     _materialsList->updateFromModel(model);

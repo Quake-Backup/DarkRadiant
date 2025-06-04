@@ -89,7 +89,7 @@ const std::string& SoundShader::getDisplayFolder()
 
 vfs::Visibility SoundShader::getVisibility()
 {
-    return getBlockSyntax().fileInfo.visibility;
+    return getDeclSource().fileInfo.visibility;
 }
 
 } // namespace

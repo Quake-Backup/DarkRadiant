@@ -298,7 +298,7 @@ protected:
     // After parsing, inheritance and colour overrides will be resolved
     void onParsingFinished() override;
 
-    void onSyntaxBlockAssigned(const decl::DeclarationBlockSyntax& block) override;
+    void onSyntaxBlockAssigned(const decl::DeclarationBlockSource& block) override;
 };
 
 } // namespace scene

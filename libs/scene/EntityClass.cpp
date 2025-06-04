@@ -52,7 +52,7 @@ vfs::Visibility EntityClass::getVisibility()
     ensureParsed();
 
     // File visibility overrides the setting in the entity key/value pairs
-    return getBlockSyntax().fileInfo.visibility == vfs::Visibility::HIDDEN ?
+    return getDeclSource().fileInfo.visibility == vfs::Visibility::HIDDEN ?
         vfs::Visibility::HIDDEN : _visibility.get();
 }
 
@@ -61,7 +61,7 @@ sigc::signal<void>& EntityClass::changedSignal()
     return _changedSignal;
 }
 
-void EntityClass::onSyntaxBlockAssigned(const decl::DeclarationBlockSyntax& block)
+void EntityClass::onSyntaxBlockAssigned(const decl::DeclarationBlockSource& block)
 {
     DeclarationBase<decl::IDeclaration>::onSyntaxBlockAssigned(block);
 

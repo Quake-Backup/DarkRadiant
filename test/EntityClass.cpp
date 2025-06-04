@@ -462,7 +462,7 @@ entityDef aReplacementDef
     eclass = GlobalEntityClassManager().findClass("someDefThatIsGoingToBeRemoved");
 
     EXPECT_TRUE(eclass) << "entityDef should still be registered after reloadDecls";
-    EXPECT_TRUE(eclass->getBlockSyntax().contents.empty()) << "entityDef should be empty after reloadDecls";
+    EXPECT_TRUE(eclass->getDeclSource().contents.empty()) << "entityDef should be empty after reloadDecls";
     EXPECT_EQ(eclass->getVisibility(), vfs::Visibility::HIDDEN) << "entityDef should be hidden after reloadDecls";
 }
 
@@ -600,7 +600,7 @@ TEST_F(EntityClassTest, FindModelDef)
     auto model = GlobalEntityClassManager().findModel("just_a_model");
     EXPECT_TRUE(model) << "ModelDef lookup failed";
     EXPECT_EQ(model->getMesh(), "just_an_md5.md5mesh");
-    EXPECT_EQ(model->getBlockSyntax().fileInfo.fullPath(), "def/entity_with_model.def");
+    EXPECT_EQ(model->getDeclSource().fileInfo.fullPath(), "def/entity_with_model.def");
 
     EXPECT_TRUE(GlobalEntityClassManager().findModel("some_other_model"));
     EXPECT_TRUE(GlobalEntityClassManager().findModel("a_cooler_model"));

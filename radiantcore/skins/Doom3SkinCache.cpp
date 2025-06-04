@@ -54,11 +54,11 @@ decl::ISkin::Ptr Doom3SkinCache::copySkin(const std::string& nameOfOriginal, con
         GlobalDeclarationManager().findOrCreateDeclaration(decl::Type::Skin, candidate));
 
     // Replace the syntax block of the target with the one of the original
-    auto syntax = existing->getBlockSyntax();
+    auto syntax = existing->getDeclSource();
     syntax.name = nameOfCopy;
     syntax.fileInfo = vfs::FileInfo{ "", "", vfs::Visibility::HIDDEN };
 
-    copiedSkin->setBlockSyntax(syntax);
+    copiedSkin->setDeclSource(syntax);
     copiedSkin->setIsModified();
 
     return copiedSkin;
@@ -91,7 +91,7 @@ bool Doom3SkinCache::skinCanBeModified(const std::string& name)
 
     if (!decl) return false;
 
-    const auto& fileInfo = decl->getBlockSyntax().fileInfo;
+    const auto& fileInfo = decl->getDeclSource().fileInfo;
     return fileInfo.name.empty() || fileInfo.getIsPhysicalFile();
 }
 

@@ -44,7 +44,7 @@ public:
 
     void setFilename(const std::string& filename) override
     {
-        auto syntax = getBlockSyntax();
+        auto syntax = getDeclSource();
         setFileInfo(vfs::FileInfo(syntax.fileInfo.topDir, filename, vfs::Visibility::NORMAL));
     }
 
@@ -78,7 +78,7 @@ public:
 protected:
     void onBeginParsing() override;
     void parseFromTokens(parser::DefTokeniser& tok) override;
-    void onSyntaxBlockAssigned(const decl::DeclarationBlockSyntax& block) override;
+    void onSyntaxBlockAssigned(const decl::DeclarationBlockSource& block) override;
 
     std::string generateSyntax() override;
 
@@ -95,7 +95,7 @@ inline std::ostream& operator<<(std::ostream& stream, ParticleDef& def)
     stream << "particle " << def.getDeclName() << " \n{";
 
     // The raw contents (contains all needed line breaks)
-    stream << def.getBlockSyntax().contents;
+    stream << def.getDeclSource().contents;
 
     // Closing brace
     stream << "}";

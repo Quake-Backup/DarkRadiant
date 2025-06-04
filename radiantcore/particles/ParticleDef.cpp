@@ -12,7 +12,7 @@ sigc::signal<void>& ParticleDef::signal_changed()
 
 vfs::Visibility ParticleDef::getVisibility()
 {
-    return getBlockSyntax().fileInfo.visibility;
+    return getDeclSource().fileInfo.visibility;
 }
 
 float ParticleDef::getDepthHack()
@@ -162,7 +162,7 @@ void ParticleDef::parseFromTokens(parser::DefTokeniser& tokeniser)
     }
 }
 
-void ParticleDef::onSyntaxBlockAssigned(const decl::DeclarationBlockSyntax& block)
+void ParticleDef::onSyntaxBlockAssigned(const decl::DeclarationBlockSource& block)
 {
     EditableDeclaration<IParticleDef>::onSyntaxBlockAssigned(block);
 

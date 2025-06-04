@@ -80,7 +80,7 @@ bool MaterialManager::materialCanBeModified(const std::string& name)
     }
 
     auto decl = _library->getTemplate(name);
-    const auto& fileInfo = decl->getBlockSyntax().fileInfo;
+    const auto& fileInfo = decl->getDeclSource().fileInfo;
     return fileInfo.name.empty() || fileInfo.getIsPhysicalFile();
 }
 

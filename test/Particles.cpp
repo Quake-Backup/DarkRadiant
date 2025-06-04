@@ -208,7 +208,7 @@ TEST_F(ParticlesTest, FindOrInsertParticleDef)
 
     EXPECT_EQ(inserted->getDeclName(), "flamejet_nonexisting");
     EXPECT_EQ(inserted->getDeclType(), decl::Type::Particle);
-    EXPECT_EQ(inserted->getBlockSyntax().contents, "");
+    EXPECT_EQ(inserted->getDeclSource().contents, "");
 }
 
 TEST_F(ParticlesTest, ParticlesSupportsAssetsLst)
@@ -261,12 +261,12 @@ inline particles::IParticleDef::Ptr createParticleFromSource(const std::string& 
 
     auto source = createParticleSource();
 
-    decl::DeclarationBlockSyntax syntax;
+    decl::DeclarationBlockSource syntax;
     syntax.typeName = "particle";
     syntax.name = defName;
     syntax.contents = source;
     syntax.fileInfo = vfs::FileInfo("particles/", "export_particle_test.prt", vfs::Visibility::NORMAL);
-    decl->setBlockSyntax(syntax);
+    decl->setDeclSource(syntax);
     decl->getDepthHack(); // ensure the particle is parsed
     decl->setFilename(os::getFilename(syntax.fileInfo.fullPath()));
 
@@ -325,7 +325,7 @@ TEST_F(ParticlesTest, SaveNewParticleToNewFile)
 {
     auto decl = createParticleFromSource("some_def");
 
-    const auto& syntax = decl->getBlockSyntax();
+    const auto& syntax = decl->getDeclSource();
     auto outputPath = _context.getTestProjectPath() + syntax.fileInfo.fullPath();
     EXPECT_FALSE(fs::exists(outputPath)) << "Output file shouldn't exist yet";
 
@@ -336,7 +336,7 @@ TEST_F(ParticlesTest, SaveNewParticleToNewFile)
 
     EXPECT_TRUE(fs::exists(outputPath)) << "Output file should exist now";
 
-    expectParticleIsPresentInFile(decl, decl->getBlockSyntax().fileInfo.fullPath(), true);
+    expectParticleIsPresentInFile(decl, decl->getDeclSource().fileInfo.fullPath(), true);
 }
 
 // Save the particle to a file that already exists (but doesn't contain the def)
@@ -347,11 +347,11 @@ TEST_F(ParticlesTest, SaveNewParticleToExistingFile)
     setParticleFilename(decl, TEST_PARTICLE_FILE);
 
     // Def file should not have that particle def yet
-    expectParticleIsPresentInFile(decl, decl->getBlockSyntax().fileInfo.fullPath(), false);
+    expectParticleIsPresentInFile(decl, decl->getDeclSource().fileInfo.fullPath(), false);
 
     GlobalParticlesManager().saveParticleDef(decl->getDeclName());
 
-    expectParticleIsPresentInFile(decl, decl->getBlockSyntax().fileInfo.fullPath(), true);
+    expectParticleIsPresentInFile(decl, decl->getDeclSource().fileInfo.fullPath(), true);
 }
 
 // Save a particle to the same physical file that originally declared the decl
@@ -360,17 +360,17 @@ TEST_F(ParticlesTest, SaveExistingParticleToExistingFile)
     auto decl = GlobalParticlesManager().getDefByName("firefly_blue");
 
     // Swap the material name of this particle
-    auto syntax = decl->getBlockSyntax();
+    auto syntax = decl->getDeclSource();
     EXPECT_NE(syntax.contents.find("firefly_blue"), std::string::npos) << "Expected the material name in the block";
     string::replace_all(syntax.contents, "firefly_blue", "modified_material");
-    decl->setBlockSyntax(syntax);
+    decl->setDeclSource(syntax);
 
     // This modified particle should not be present
-    expectParticleIsPresentInFile(decl, decl->getBlockSyntax().fileInfo.fullPath(), false);
+    expectParticleIsPresentInFile(decl, decl->getDeclSource().fileInfo.fullPath(), false);
 
     // Save, it should be there now
     GlobalParticlesManager().saveParticleDef(decl->getDeclName());
-    expectParticleIsPresentInFile(decl, decl->getBlockSyntax().fileInfo.fullPath(), true);
+    expectParticleIsPresentInFile(decl, decl->getDeclSource().fileInfo.fullPath(), true);
 
     // The test fixture will restore the original file contents in TearDown
 }
@@ -379,23 +379,23 @@ TEST_F(ParticlesTest, SaveChangedParticle)
 {
     auto decl = GlobalParticlesManager().getDefByName("firefly_blue");
 
-    auto blockSyntaxBeforeChange = decl->getBlockSyntax().contents;
+    auto blockSyntaxBeforeChange = decl->getDeclSource().contents;
 
     // Swap the material name of this particle, and set the depth hack
     decl->setDepthHack(0.56789f);
     decl->getStage(0)->setMaterialName("modified_material");
 
     // Block syntax should have changed by now
-    auto blockSyntaxAfterChange = decl->getBlockSyntax().contents;
+    auto blockSyntaxAfterChange = decl->getDeclSource().contents;
 
     EXPECT_NE(blockSyntaxBeforeChange, blockSyntaxAfterChange) << "Syntax block should have changed";
 
     // This modified particle should not be present in the file
-    expectParticleIsPresentInFile(decl, decl->getBlockSyntax().fileInfo.fullPath(), false);
+    expectParticleIsPresentInFile(decl, decl->getDeclSource().fileInfo.fullPath(), false);
 
     // Save, it should be there now
     GlobalParticlesManager().saveParticleDef(decl->getDeclName());
-    expectParticleIsPresentInFile(decl, decl->getBlockSyntax().fileInfo.fullPath(), true);
+    expectParticleIsPresentInFile(decl, decl->getDeclSource().fileInfo.fullPath(), true);
 
     // The test fixture will restore the original file contents in TearDown
 }
@@ -406,28 +406,28 @@ TEST_F(ParticlesTest, SaveExistingParticleToNewFileOverridingPk4)
     auto decl = GlobalParticlesManager().getDefByName("firefly_blue_in_pk4");
 
     // Swap the material name of this particle
-    auto syntax = decl->getBlockSyntax();
+    auto syntax = decl->getDeclSource();
     EXPECT_NE(syntax.contents.find("firefly_blue"), std::string::npos) << "Expected the material name in the block";
     string::replace_all(syntax.contents, "firefly_blue", "modified_material");
-    decl->setBlockSyntax(syntax);
+    decl->setDeclSource(syntax);
 
     // The overriding file should not be present
-    auto outputPath = _context.getTestProjectPath() + decl->getBlockSyntax().fileInfo.fullPath();
+    auto outputPath = _context.getTestProjectPath() + decl->getDeclSource().fileInfo.fullPath();
 
     // Let the file be deleted when we're done here
     TemporaryFile outputFile(outputPath);
     EXPECT_FALSE(fs::exists(outputPath));
 
-    expectParticleIsPresentInFile(decl, decl->getBlockSyntax().fileInfo.fullPath(), false);
+    expectParticleIsPresentInFile(decl, decl->getDeclSource().fileInfo.fullPath(), false);
 
     // Save, it should be there now
     GlobalParticlesManager().saveParticleDef(decl->getDeclName());
-    expectParticleIsPresentInFile(decl, decl->getBlockSyntax().fileInfo.fullPath(), true);
+    expectParticleIsPresentInFile(decl, decl->getDeclSource().fileInfo.fullPath(), true);
 
     // Check if the other particle declaration is still intact in the file (use the same path to check)
     auto otherDecl = GlobalParticlesManager().getDefByName("tdm_fire_torch_in_pk4");
     EXPECT_EQ(otherDecl->getDeclFilePath(), decl->getDeclFilePath()) << "The decls should be in the same .prt file";
-    expectParticleIsPresentInFile(otherDecl, decl->getBlockSyntax().fileInfo.fullPath(), true);
+    expectParticleIsPresentInFile(otherDecl, decl->getDeclSource().fileInfo.fullPath(), true);
 }
 
 // Assumes that the syntax changes after performing the given action on the named particle
@@ -437,12 +437,12 @@ inline void expectSyntaxChangeAfter(const std::string& defName,
     std::function<void(const std::string&)> predicate = [](const std::string&) { })
 {
     auto decl = GlobalParticlesManager().getDefByName(defName);
-    auto blockSyntaxBeforeChange = decl->getBlockSyntax().contents;
+    auto blockSyntaxBeforeChange = decl->getDeclSource().contents;
 
     action(decl);
 
     // Block syntax should have changed by now
-    auto blockSyntaxAfterChange = decl->getBlockSyntax().contents;
+    auto blockSyntaxAfterChange = decl->getDeclSource().contents;
 
     EXPECT_NE(blockSyntaxBeforeChange, blockSyntaxAfterChange) << "Syntax block should have changed";
 
@@ -486,8 +486,8 @@ TEST_F(ParticlesTest, SyntaxChangeSwapStages)
 
     expectSyntaxChangeAfter("flamejet", [&](const particles::IParticleDef::Ptr& decl)
     {
-        fireBigPositionBeforeChange = decl->getBlockSyntax().contents.find("textures/particles/pfirebig2");
-        dustPositionBeforeChange = decl->getBlockSyntax().contents.find("textures/particles/dust");
+        fireBigPositionBeforeChange = decl->getDeclSource().contents.find("textures/particles/pfirebig2");
+        dustPositionBeforeChange = decl->getDeclSource().contents.find("textures/particles/dust");
 
         decl->swapParticleStages(0, 1);
     },
