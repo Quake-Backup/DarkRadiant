@@ -2236,16 +2236,16 @@ be marked as "hidden". A hidden asset will no longer be presented for selection
 by the user (e.g. on the Media tab or in the Model selector), but will continue
 to function as normal when it appears in a loaded map.
 
-The mechanism for hiding assets depends on the asset type: models and materials
-use a file-based `assets.lst` approach, whereas entity classes use a dedicated
-spawnarg.
+The mechanism for hiding assets depends on the asset type: models, materials, particles
+and sound shaders use a file-based `assets.lst` approach, whereas entity classes use a
+dedicated spawnarg.
 
-==== Hiding models or materials
+==== Hiding models, materials, particles or sound shaders
 
-To change the visibility of models or materials, you need to create a file
-called `assets.lst` which resides in the top-level `models` or `materials`
-directory in the mod installation. This file may be inside a PK4 or in an
-extracted directory tree.
+To change the visibility of these types of asset, you need to create a file called
+`assets.lst` which resides in the top-level `models`, `materials`, `particles` or `sound`
+directory in the mod installation. This file may be inside a PK4 or in an extracted
+directory tree.
 
 The contents of `assets.lst` are a simple list of key/value pairs, assigning a
 visibility value to each named asset. For example:
@@ -2261,11 +2261,11 @@ directory containing `assets.lst`. The visibility value on the right-hand side
 must be either `hidden` or `normal`; a value of `normal` is equivalent to not
 listing the file at all, and results in no change to its visibility.
 
-NOTE: Only *files* may be listed in an `assets.lst`, not items in a virtual
-hierarchy such as the material shader tree. When an MTR file is listed as hidden
-in the `materials` directory, all shaders contained within it will be hidden in
-DarkRadiant. This means that in order to hide specific shaders, you must move
-these into one or more MTR files which are listed as hidden.
+NOTE: Only *files* may be listed in an `assets.lst`, not items in a virtual hierarchy such
+as the material shader tree. When a `.mtr` or `.sndshd` file is listed as hidden, all
+shaders contained within it will be hidden in DarkRadiant. This means that in order to
+hide specific shaders, you must move these into one or more source files which are listed
+as hidden.
 
 ==== Hiding entities
 
