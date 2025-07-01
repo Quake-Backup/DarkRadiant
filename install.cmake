@@ -12,7 +12,7 @@ if (${ENABLE_DM_PLUGINS})
             LIBRARY DESTINATION ${PKGLIBDIR}/plugins)
 endif()
 
-if (${LIBGIT_FOUND})
+if (${ENABLE_GIT_PLUGIN} AND ${LIBGIT_FOUND})
     install(TARGETS vcs LIBRARY DESTINATION ${PKGLIBDIR}/plugins)
 endif()
 

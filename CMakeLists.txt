@@ -14,6 +14,7 @@ endif()
 
 # Expose some build options
 option(ENABLE_DM_PLUGINS "Build Dark Mod specific plugins" ON)
+option(ENABLE_GIT_PLUGIN "Build the Git VCS integration plugin" ON)
 option(ENABLE_RELOCATION
        "Avoid hard-coded absolute paths to libraries or resources"
        ON)
@@ -116,9 +117,12 @@ add_subdirectory(libs/module)
 add_subdirectory(plugins/script)
 add_subdirectory(plugins/sound)
 
-pkg_check_modules(LIBGIT libgit2)
-if (${LIBGIT_FOUND})
-    add_subdirectory(plugins/vcs)
+# Optional Git plugin
+if (${ENABLE_GIT_PLUGIN})
+    pkg_check_modules(LIBGIT libgit2)
+    if (${LIBGIT_FOUND})
+        add_subdirectory(plugins/vcs)
+    endif()
 endif()
 
 # Dark Mod plugins
