@@ -58,7 +58,7 @@ public:
     // Regular constructor for the non-entitykeyvalue types
     static FilterRule Create(const FilterType type, const std::string& match, bool show)
     {
-        assert(type != FilterType::SPAWNARG); 
+        assert(type != FilterType::SPAWNARG);
 
         return FilterRule(type, match, show);
     }
@@ -70,3 +70,15 @@ public:
     }
 };
 typedef std::vector<FilterRule> FilterRules;
+
+// Equality comparison for FilterRule
+inline bool operator== (const FilterRule& lhs, const FilterRule& rhs)
+{
+    return lhs.type == rhs.type && lhs.match == rhs.match && lhs.show == rhs.show
+        && (lhs.type != FilterType::SPAWNARG || lhs.entityKey == rhs.entityKey);
+}
+
+inline bool operator!= (const FilterRule& lhs, const FilterRule& rhs)
+{
+    return !(lhs == rhs);
+}

@@ -86,6 +86,21 @@ TEST_F(FilterTest, FilterRules)
     EXPECT_FALSE(filter.isEntityVisible(FilterType::ECLASS, *worldEnt));
 }
 
+TEST_F(FilterTest, FilterRuleEquality)
+{
+    FilterRule hideStatic = FilterRule::Create(FilterType::ECLASS, "func_static", false);
+    FilterRule hideLight = FilterRule::Create(FilterType::ECLASS, "light", false);
+    FilterRule hideBrush = FilterRule::Create(FilterType::OBJECT, "brush", false);
+    FilterRule hideBrush2 = FilterRule::Create(FilterType::OBJECT, "brush", false);
+
+    EXPECT_TRUE(hideStatic == hideStatic);
+    EXPECT_FALSE(hideStatic != hideStatic);
+    EXPECT_FALSE(hideStatic == hideLight);
+    EXPECT_FALSE(hideLight == hideBrush);
+    EXPECT_TRUE(hideBrush == hideBrush2);
+    EXPECT_FALSE(hideBrush != hideBrush2);
+}
+
 TEST_F(FilterTest, FiltersLoadedFromGameXML)
 {
     bool allReadOnly = true;
