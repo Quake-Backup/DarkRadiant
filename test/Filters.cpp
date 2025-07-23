@@ -1,6 +1,7 @@
 #include "RadiantTest.h"
 
 #include "ifilter.h"
+#include "scene/Entity.h"
 #include "scene/Node.h"
 #include "imap.h"
 #include "scene/filters/SceneFilter.h"
@@ -95,6 +96,21 @@ TEST_F(FilterTest, FilterRules)
         EXPECT_TRUE(brushFilter.isEntityVisible(FilterType::ECLASS, *worldEnt));
         EXPECT_FALSE(brushFilter.isVisible(FilterType::OBJECT, "brush"));
         EXPECT_TRUE(brushFilter.isVisible(FilterType::OBJECT, "patch"));
+    }
+
+    // Spawnarg filtering
+    {
+        filters::SceneFilter spawnargFilter("Hide from spawnarg", false);
+        spawnargFilter.addRule(filters::SpawnArgQuery{"hidden", "1"});
+
+        EXPECT_TRUE(spawnargFilter.isEntityVisible(FilterType::ECLASS, *worldEnt));
+        worldEnt->setKeyValue("hidden", "0");
+        EXPECT_TRUE(spawnargFilter.isEntityVisible(FilterType::ECLASS, *worldEnt));
+        EXPECT_TRUE(spawnargFilter.isEntityVisible(FilterType::SPAWNARG, *worldEnt));
+        worldEnt->setKeyValue("hidden", "1");
+        EXPECT_FALSE(spawnargFilter.isEntityVisible(FilterType::SPAWNARG, *worldEnt));
+        worldEnt->setKeyValue("hidden", "10");
+        EXPECT_TRUE(spawnargFilter.isEntityVisible(FilterType::SPAWNARG, *worldEnt));
     }
 }
 

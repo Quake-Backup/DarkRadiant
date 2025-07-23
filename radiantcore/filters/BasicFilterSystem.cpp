@@ -544,25 +544,21 @@ bool BasicFilterSystem::isVisible(const FilterType type, const std::string& name
     return visFlag;
 }
 
-bool BasicFilterSystem::isEntityVisible(const FilterType type, const Entity& entity)
+bool BasicFilterSystem::isEntityVisible(const Entity& entity) const
 {
-    // Otherwise, walk the list of active filters to find a value for
-    // this item.
-    bool visFlag = true; // default if no filters modify it
-
-    for (const auto& active : _activeFilters)
+    // Check each active filter in turn
+    for (const auto& [name, filter] : _activeFilters)
     {
-        // Delegate the check to the filter object. If a filter returns
-        // false for the visibility check, then the item is filtered
-        // and we don't need any more checks.
-        if (!active.second->isEntityVisible(type, entity))
+        // Check if the filter hides the entity class or any matching spawnargs
+        if (!filter->isEntityVisible(FilterType::ECLASS, entity)
+            || !filter->isEntityVisible(FilterType::SPAWNARG, entity))
         {
-            visFlag = false;
-            break;
+            return false;
         }
     }
 
-    return visFlag;
+    // No filters hid this entity, so it's still visible
+    return true;
 }
 
 FilterRules BasicFilterSystem::getRuleSet(const std::string& filter)

@@ -114,11 +114,10 @@ public:
      * @brief Tests whether a given entity should be visible based on the
      * currently active filters.
      *
-     * @param type The filter type to query.
      * @param entity The entity to test.
      * @return True if the entity is visible, false otherwise.
      */
-    virtual bool isEntityVisible(const FilterType type, const Entity& entity) = 0;
+    virtual bool isEntityVisible(const Entity& entity) const = 0;
 
     // ===== API for Filter Management and Editing =====
 

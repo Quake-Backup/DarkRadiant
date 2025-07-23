@@ -1,12 +1,12 @@
 #pragma once
 
-#include "ieclass.h"
 #include "inode.h"
 #include "imodule.h"
 #include "irender.h"
 #include <functional>
 
 #include "scene/scene_fwd.h"
+#include "scene/EntityClass.h"
 
 // Observes a single entity key value and gets notified on change
 class KeyObserver: public sigc::trackable

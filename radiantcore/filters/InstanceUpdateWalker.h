@@ -108,16 +108,13 @@ public:
 	}
 
 private:
-	bool evaluateEntity(const scene::INodePtr& node)
-	{
-		assert(Node_isEntity(node));
+    bool evaluateEntity(const scene::INodePtr& node) const
+    {
+        Entity* entity = node->tryGetEntity();
+        assert(entity);
 
-		Entity* entity = node->tryGetEntity();
-
-		// Check the eclass first
-		return _filterSystem.isEntityVisible(FilterType::ECLASS, *entity) &&
-			_filterSystem.isEntityVisible(FilterType::SPAWNARG, *entity);
-	}
+        return _filterSystem.isEntityVisible(*entity);
+    }
 
 	bool evaluatePatch(const scene::INodePtr& node)
 	{
