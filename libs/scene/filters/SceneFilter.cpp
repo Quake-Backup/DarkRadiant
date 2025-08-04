@@ -9,10 +9,52 @@
 namespace filters
 {
 
-SceneFilter::SceneFilter(const std::string& name, bool readOnly) :
+SceneFilter::SceneFilter(const std::string& name, bool readOnly):
     _name(name),
     _readonly(readOnly)
 {
+    updateEventName();
+}
+
+SceneFilter::SceneFilter(const xml::Node& node, bool readOnly):
+    _readonly(readOnly),
+    _name(node.getAttributeValue("name"))
+{
+    // Get all of the filterCriterion children of this node
+    xml::NodeList critNodes = node.getNamedChildren("filterCriterion");
+
+    // Create XMLFilterRule objects for each criterion
+    for (const auto& critNode : critNodes)
+    {
+        std::string typeStr = critNode.getAttributeValue("type");
+        bool show = critNode.getAttributeValue("action") == "show";
+        std::string match = critNode.getAttributeValue("match");
+
+        if (typeStr == "texture")
+        {
+            addRule(filters::TextureQuery{match}, show);
+        }
+        else if (typeStr == "entityclass")
+        {
+            addRule(filters::EntityClassQuery{match}, show);
+        }
+        else if (typeStr == "object")
+        {
+            addRule(
+                filters::PrimitiveQuery{
+                    match == "brush" ? PrimitiveType::Brush : PrimitiveType::Patch
+                },
+                show
+            );
+        }
+        else if (typeStr == "entitykeyvalue")
+        {
+            addRule(
+                filters::SpawnArgQuery{critNode.getAttributeValue("key"), match}, show
+            );
+        }
+    }
+
     updateEventName();
 }
 

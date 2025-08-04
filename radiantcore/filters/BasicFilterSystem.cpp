@@ -54,45 +54,6 @@ void BasicFilterSystem::setAllFilterStates(bool state)
     GlobalSceneGraph().sceneChanged();
 }
 
-void BasicFilterSystem::setFilterStateCmd(const cmd::ArgumentList& args)
-{
-    if (args.size() != 2)
-    {
-        rMessage() << "Usage: SetFilterState <FilterName> <1|0>" << std::endl;
-        rMessage() << " an argument value of 1 activates the named filters, 0 deactivates it." << std::endl;
-        return;
-    }
-
-    std::string filterName = args[0].getString();
-
-    if (_availableFilters.find(filterName) == _availableFilters.end())
-    {
-        rError() << "Unknown filter: " << filterName << std::endl;
-        return;
-    }
-
-    setFilterState(args[0].getString(), args[1].getInt() != 0);
-}
-
-void BasicFilterSystem::toggleFilterStateCmd(const cmd::ArgumentList& args)
-{
-    if (args.size() != 2)
-    {
-        rMessage() << "Usage: ToggleFilterState <FilterName>" << std::endl;
-        return;
-    }
-
-    std::string filterName = args[0].getString();
-
-    if (_availableFilters.find(filterName) == _availableFilters.end())
-    {
-        rError() << "Unknown filter: " << filterName << std::endl;
-        return;
-    }
-
-    setFilterState(filterName, !getFilterState(filterName));
-}
-
 void BasicFilterSystem::selectObjectsByFilterCmd(const cmd::ArgumentList& args)
 {
     if (args.size() != 1)
@@ -153,16 +114,6 @@ void BasicFilterSystem::initialiseModule(const IApplicationContext& ctx)
     // user-defined filters
     addFiltersFromXML(userFilters, false);
 
-    // Command to activate/deactivate a named filter
-    GlobalCommandSystem().addCommand("SetFilterState",
-        std::bind(&BasicFilterSystem::setFilterStateCmd, this, std::placeholders::_1),
-        { cmd::ARGTYPE_STRING, cmd::ARGTYPE_INT });
-
-    // Command to toggle a named filter's state
-    GlobalCommandSystem().addCommand("ToggleFilterState",
-        std::bind(&BasicFilterSystem::toggleFilterStateCmd, this, std::placeholders::_1),
-        { cmd::ARGTYPE_STRING });
-
     // Shortcuts to enable/disable all filters
     GlobalCommandSystem().addCommand(
         "ActivateAllFilters", [=](const cmd::ArgumentList&) { setAllFilterStates(true); }
@@ -194,56 +145,16 @@ void BasicFilterSystem::addFiltersFromXML(const xml::NodeList& nodes, bool readO
     // Iterate over the list of nodes, adding filter objects onto the list
     for (const auto& node : nodes)
     {
-        // Initialise the SceneFilter object
-        std::string filterName = node.getAttributeValue("name");
-        auto filter = std::make_shared<SceneFilter>(filterName, readOnly);
-
-        // Get all of the filterCriterion children of this node
-        xml::NodeList critNodes = node.getNamedChildren("filterCriterion");
-
-        // Create XMLFilterRule objects for each criterion
-        for (const auto& critNode : critNodes)
-        {
-            std::string typeStr = critNode.getAttributeValue("type");
-            bool show = critNode.getAttributeValue("action") == "show";
-            std::string match = critNode.getAttributeValue("match");
-
-            if (typeStr == "texture")
-            {
-                filter->addRule(filters::TextureQuery{match}, show);
-            }
-            else if (typeStr == "entityclass")
-            {
-                filter->addRule(filters::EntityClassQuery{match}, show);
-            }
-            else if (typeStr == "object")
-            {
-                filter->addRule(
-                    filters::PrimitiveQuery{
-                        match == "brush" ? PrimitiveType::Brush : PrimitiveType::Patch
-                    },
-                    show
-                );
-            }
-            else if (typeStr == "entitykeyvalue")
-            {
-                filter->addRule(
-                    filters::SpawnArgQuery{critNode.getAttributeValue("key"), match}, show
-                );
-            }
-        }
-
         // Add this SceneFilter to the list of available filters
-        SceneFilter::Ptr inserted = _availableFilters.emplace(filterName, filter).first->second;
-
-        bool filterShouldBeActive = activeFilterNames.find(filterName) != activeFilterNames.end();
-
-        auto adapter = ensureEventAdapter(*inserted);
+        auto filter = std::make_shared<SceneFilter>(node, readOnly);
+        SceneFilter::Ptr inserted = _availableFilters.emplace(filter->getName(), filter).first->second;
 
         // If this filter is in our active set, enable it
+        bool filterShouldBeActive = activeFilterNames.find(filter->getName()) != activeFilterNames.end();
+        ensureEventAdapter(*inserted);
         if (filterShouldBeActive)
         {
-            _activeFilters.emplace(filterName, inserted);
+            _activeFilters.emplace(filter->getName(), inserted);
         }
     }
 }

@@ -6,6 +6,7 @@
 #include "imap.h"
 #include "scene/filters/SceneFilter.h"
 #include "scenelib.h"
+#include "xmlutil/Document.h"
 
 namespace test
 {
@@ -141,6 +142,29 @@ TEST_F(FilterTest, FilterRuleEquality)
     EXPECT_FALSE(hideLight == hideBrush);
     EXPECT_TRUE(hideBrush == hideBrush2);
     EXPECT_FALSE(hideBrush != hideBrush2);
+}
+
+TEST_F(FilterTest, ConstructFilterFromXMLNode)
+{
+    // Create the XML node
+    xml::Document filterDoc;
+    xml::Node filterNode = filterDoc.addTopLevelNode("filter");
+    filterNode.setAttributeValue("name", "collisions");
+    xml::Node crit = filterNode.createChild("filterCriterion");
+    crit.setAttributeValue("type", "texture");
+    crit.setAttributeValue("match", "textures/common/collision");
+    crit.setAttributeValue("action", "hide");
+
+    // Construct the filter object
+    filters::SceneFilter filter(filterNode, false);
+    EXPECT_EQ(filter.getName(), "collisions");
+    EXPECT_EQ(filter.getEventName(), "Filtercollisions");
+
+    const FilterRules& rules = filter.getRuleSet();
+    ASSERT_EQ(rules.size(), 1);
+    EXPECT_EQ(rules.at(0).type, FilterType::TEXTURE);
+    EXPECT_EQ(rules.at(0).match, "textures/common/collision");
+    EXPECT_EQ(rules.at(0).show, false);
 }
 
 TEST_F(FilterTest, FiltersLoadedFromGameXML)

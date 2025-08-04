@@ -4,7 +4,6 @@
 #include "ifilter.h"
 #include "ipatch.h"
 #include "ibrush.h"
-#include "scene/EntityNode.h"
 #include "scene/filters/SceneFilter.h"
 #include "iselectable.h"
 

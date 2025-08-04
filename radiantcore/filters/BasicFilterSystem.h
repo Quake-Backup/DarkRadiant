@@ -48,8 +48,6 @@ private:
     void updateShaders();
     void addFiltersFromXML(const xml::NodeList& nodes, bool readOnly);
     XmlFilterEventAdapter::Ptr ensureEventAdapter(SceneFilter& filter);
-    void setFilterStateCmd(const cmd::ArgumentList& args);
-    void toggleFilterStateCmd(const cmd::ArgumentList& args);
     void selectObjectsByFilterCmd(const cmd::ArgumentList& args);
     void deselectObjectsByFilterCmd(const cmd::ArgumentList& args);
     void setObjectSelectionByFilter(const std::string& filterName, bool select);

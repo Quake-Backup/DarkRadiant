@@ -1,6 +1,7 @@
 #pragma once
 
 #include "FilterRule.h"
+#include "xmlutil/Node.h"
 
 #include <string>
 #include <memory>
@@ -34,11 +35,14 @@ class SceneFilter
 public:
     typedef std::shared_ptr<SceneFilter> Ptr;
 
-    /** Construct an SceneFilter with the given name.
-     * Pass the read-only flag to indicate whether this filter is
-     * custom or coming from the "stock" filters in the .game files.
-     */
+    /// Construct an SceneFilter with the given name.
+    ///
+    /// Pass the read-only flag to indicate whether this filter is custom or coming from
+    /// the "stock" filters in the .game files.
     SceneFilter(const std::string& name, bool readOnly);
+
+    /// Construct a SceneFilter from an XML node
+    SceneFilter(const xml::Node& node, bool readOnly);
 
     // Noncopyable
     SceneFilter(const SceneFilter&) = delete;
