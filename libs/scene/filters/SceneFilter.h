@@ -49,6 +49,14 @@ public:
     SceneFilter& operator=(const SceneFilter&) = delete;
 
     /**
+     * @brief Save the contents of this filter to XML.
+     *
+     * @param parentNode Node under which a <filter> child node should be created, storing
+     * the contents of this filter.
+     */
+    void saveToNode(xml::Node& parentNode);
+
+    /**
      * @brief Add a rule to this filter.
      *
      * @param query

@@ -58,7 +58,27 @@ SceneFilter::SceneFilter(const xml::Node& node, bool readOnly):
     updateEventName();
 }
 
-// Test visibility of an item against all rules
+void SceneFilter::saveToNode(xml::Node& parentNode)
+{
+    // Create the <filter> node for this filter
+    xml::Node filterNode = parentNode.createChild("filter");
+    filterNode.setAttributeValue("name", getName());
+
+    // Save all the rules as children to that node
+    for (const FilterRule& rule: _rules)
+    {
+        // Create a new criterion tag
+        xml::Node criterion = filterNode.createChild("filterCriterion");
+
+        if (rule.type == FilterType::SPAWNARG) {
+            criterion.setAttributeValue("key", rule.entityKey);
+        }
+        criterion.setAttributeValue("type", rule.getTypeString());
+        criterion.setAttributeValue("match", rule.match);
+        criterion.setAttributeValue("action", rule.show ? "show" : "hide");
+    }
+}
+
 bool SceneFilter::isVisible(const FilterType type, const std::string& name) const
 {
     // Iterate over the rules in this filter, checking if each one is a rule for

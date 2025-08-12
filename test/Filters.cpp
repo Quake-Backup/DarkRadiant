@@ -167,6 +167,45 @@ TEST_F(FilterTest, ConstructFilterFromXMLNode)
     EXPECT_EQ(rules.at(0).show, false);
 }
 
+TEST_F(FilterTest, SaveFilterToXMLNode)
+{
+    // Create filter with a couple of rules
+    filters::SceneFilter filter("AFilter", false);
+    filter.addRule(filters::TextureQuery{"textures/darkmod/badtex"}, false);
+    filter.addRule(filters::EntityClassQuery{"func_static"}, false);
+
+    // Construct document structure
+    xml::Document exportDoc;
+    xml::Node parentNode = exportDoc.addTopLevelNode("filtersUnderHere");
+
+    // Save the filter to the XML structure
+    filter.saveToNode(parentNode);
+
+    // Check parent nodes
+    auto children = parentNode.getChildren();
+    ASSERT_EQ(children.size(), 1);
+    auto filterNode = children.at(0);
+    EXPECT_EQ(filterNode.getAttributeValue("name"), "AFilter");
+
+    // Check criteria nodes
+    auto criteria = filterNode.getChildren();
+    ASSERT_EQ(criteria.size(), 2);
+    {
+        auto crit = criteria.at(0);
+        EXPECT_EQ(crit.getAttributeValue("key"), "");
+        EXPECT_EQ(crit.getAttributeValue("type"), "texture");
+        EXPECT_EQ(crit.getAttributeValue("match"), "textures/darkmod/badtex");
+        EXPECT_EQ(crit.getAttributeValue("action"), "hide");
+    }
+    {
+        auto crit = criteria.at(1);
+        EXPECT_EQ(crit.getAttributeValue("key"), "");
+        EXPECT_EQ(crit.getAttributeValue("type"), "entityclass");
+        EXPECT_EQ(crit.getAttributeValue("match"), "func_static");
+        EXPECT_EQ(crit.getAttributeValue("action"), "hide");
+    }
+}
+
 TEST_F(FilterTest, FiltersLoadedFromGameXML)
 {
     bool allReadOnly = true;

@@ -189,32 +189,14 @@ void BasicFilterSystem::shutdownModule()
     // Save user-defined filters too (delete all first)
     GlobalRegistry().deleteXPath(RKEY_USER_FILTER_BASE + "/filters");
 
-    // Create the new top-level node
+    // Create the new top-level node to hold all filters
     auto filterParent = GlobalRegistry().createKey(RKEY_USER_FILTER_BASE + "/filters");
 
-    for (const auto& pair : _availableFilters)
+    for (const auto& [name, filter] : _availableFilters)
     {
         // Don't save stock filters
-        if (pair.second->isReadOnly()) continue;
-
-        // Create a new filter node with a name
-        xml::Node filter = filterParent.createChild("filter");
-        filter.setAttributeValue("name", pair.first);
-
-        // Save all the rules as children to that node
-        const auto& ruleSet = pair.second->getRuleSet();
-
-        for (const auto& rule : ruleSet)
-        {
-            // Create a new criterion tag
-            xml::Node criterion = filter.createChild("filterCriterion");
-
-            if (rule.type == FilterType::SPAWNARG) {
-                criterion.setAttributeValue("key", rule.entityKey);
-            }
-            criterion.setAttributeValue("type", rule.getTypeString());
-            criterion.setAttributeValue("match", rule.match);
-            criterion.setAttributeValue("action", rule.show ? "show" : "hide");
+        if (!filter->isReadOnly()) {
+            filter->saveToNode(filterParent);
         }
     }
 
