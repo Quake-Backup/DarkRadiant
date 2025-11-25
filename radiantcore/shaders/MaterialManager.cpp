@@ -11,13 +11,12 @@
 #include "igame.h"
 
 #include "ShaderExpression.h"
-#include "textures/TextureManipulator.h"
+#include "scene/textures/TextureManipulator.h"
 #include "module/StaticModule.h"
 #include "decl/DeclarationCreator.h"
 #include "decl/DeclLib.h"
 
 #include <functional>
-
 
 namespace
 {

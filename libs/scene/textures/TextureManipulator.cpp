@@ -4,7 +4,6 @@
 #include "itextstream.h"
 #include "registry/registry.h"
 #include "math/Vector3.h"
-#include "../MaterialManager.h"
 #include "RGBAImage.h"
 
 namespace

@@ -12,7 +12,7 @@
 
 #include "RGBAImage.h"
 #include "textures/HeightmapCreator.h"
-#include "textures/TextureManipulator.h"
+#include "scene/textures/TextureManipulator.h"
 #include "string/predicate.h"
 #include "ShaderTemplate.h"
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "iimage.h"
+#include "math/Vector3.h"
 
 typedef unsigned char byte;
 

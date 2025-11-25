@@ -290,7 +290,6 @@ add_library(radiantcore MODULE
             shaders/TableDefinition.cpp
             shaders/TextureMatrix.cpp
             shaders/textures/GLTextureManager.cpp
-            shaders/textures/TextureManipulator.cpp
             skins/Doom3ModelSkin.cpp
             skins/Doom3SkinCache.cpp
             undo/UndoSystem.cpp
