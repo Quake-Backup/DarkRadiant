@@ -133,7 +133,7 @@ const std::string& ModelCache::getName() const
 	return _name;
 }
 
-const StringSet& ModelCache::getDependencies() const
+StringSet ModelCache::getDependencies() const
 {
 	static StringSet _dependencies;
 

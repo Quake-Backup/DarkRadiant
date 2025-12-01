@@ -5,7 +5,6 @@
 #include <cassert>
 #include <sigc++/trackable.h>
 #include <sigc++/signal.h>
-#include <mutex>
 #include <stdexcept>
 
 #include <string>
@@ -149,11 +148,12 @@ public:
     virtual const std::string& getName() const = 0;
 
     /**
-     * Return the set of dependencies for this module. The return value is a
-     * set of strings, each containing the unique name (as returned by
-     * getName()) of a module which must be initialised before this one.
+     * @brief Return the set of dependencies for this module, if any.
+     *
+     * The return value is a set of strings, each containing the unique name (as returned
+     * by getName()) of a module which must be initialised before this one.
      */
-    virtual const StringSet& getDependencies() const = 0;
+    virtual StringSet getDependencies() const { return {}; }
 
     /**
      * @brief Instruct this module to initialise itself.

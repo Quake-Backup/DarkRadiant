@@ -39,12 +39,6 @@ const std::string& WxGLWidgetManager::getName() const
 	return _name;
 }
 
-const StringSet& WxGLWidgetManager::getDependencies() const
-{
-	static StringSet _dependencies;
-	return _dependencies;
-}
-
 void WxGLWidgetManager::shutdownModule()
 {
 	_wxGLWidgets.clear();

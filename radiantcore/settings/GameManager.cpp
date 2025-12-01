@@ -48,7 +48,7 @@ const std::string& Manager::getName() const
 	return _name;
 }
 
-const StringSet& Manager::getDependencies() const
+StringSet Manager::getDependencies() const
 {
 	static StringSet _dependencies;
 

@@ -72,7 +72,7 @@ const std::string& EClassManager::getName() const
 	return _name;
 }
 
-const StringSet& EClassManager::getDependencies() const
+StringSet EClassManager::getDependencies() const
 {
     static StringSet _dependencies
     {

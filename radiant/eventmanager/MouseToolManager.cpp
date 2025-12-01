@@ -31,7 +31,7 @@ namespace
         case IMouseToolGroup::Type::OrthoView: return "OrthoView";
         case IMouseToolGroup::Type::CameraView: return "CameraView";
         case IMouseToolGroup::Type::TextureTool: return "TextureTool";
-        default: 
+        default:
             throw std::logic_error("Tool group name not resolvable: " + string::to_string(static_cast<int>(group)));
         }
     }
@@ -59,7 +59,7 @@ const std::string& MouseToolManager::getName() const
     return _name;
 }
 
-const StringSet& MouseToolManager::getDependencies() const
+StringSet MouseToolManager::getDependencies() const
 {
     static StringSet _dependencies;
 

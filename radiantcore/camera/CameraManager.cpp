@@ -13,7 +13,7 @@ const std::string& CameraManager::getName() const
 	return _name;
 }
 
-const StringSet& CameraManager::getDependencies() const
+StringSet CameraManager::getDependencies() const
 {
 	static StringSet _dependencies { MODULE_COMMANDSYSTEM };
 	return _dependencies;

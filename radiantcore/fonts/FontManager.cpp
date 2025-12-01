@@ -2,10 +2,8 @@
 
 #include "ifilesystem.h"
 #include "ishaders.h"
-#include "itextstream.h"
 #include "iregistry.h"
 #include "igame.h"
-#include "os/path.h"
 #include "module/StaticModule.h"
 
 #include "FontLoader.h"
@@ -23,7 +21,7 @@ const std::string& FontManager::getName() const
 	return _name;
 }
 
-const StringSet& FontManager::getDependencies() const
+StringSet FontManager::getDependencies() const
 {
     static StringSet _dependencies
     {

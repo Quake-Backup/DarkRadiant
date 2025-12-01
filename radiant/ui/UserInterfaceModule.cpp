@@ -105,7 +105,7 @@ const std::string& UserInterfaceModule::getName() const
 	return _name;
 }
 
-const StringSet& UserInterfaceModule::getDependencies() const
+StringSet UserInterfaceModule::getDependencies() const
 {
     static StringSet _dependencies
     {

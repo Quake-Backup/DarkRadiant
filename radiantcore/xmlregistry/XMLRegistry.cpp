@@ -281,12 +281,6 @@ const std::string& XMLRegistry::getName() const
     return _name;
 }
 
-const StringSet& XMLRegistry::getDependencies() const
-{
-    static StringSet _dependencies; // no dependencies
-    return _dependencies;
-}
-
 void XMLRegistry::initialiseModule(const IApplicationContext& ctx)
 {
     // Load the XML files from the runtime data directory

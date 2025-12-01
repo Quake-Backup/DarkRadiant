@@ -99,7 +99,7 @@ const std::string& Doom3AasFileLoader::getName() const
 	return _name;
 }
 
-const StringSet& Doom3AasFileLoader::getDependencies() const
+StringSet Doom3AasFileLoader::getDependencies() const
 {
 	static StringSet _dependencies;
 

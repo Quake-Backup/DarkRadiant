@@ -19,7 +19,7 @@ const std::string& FilterUserInterface::getName() const
 	return _name;
 }
 
-const StringSet& FilterUserInterface::getDependencies() const
+StringSet FilterUserInterface::getDependencies() const
 {
 	static StringSet _dependencies;
 

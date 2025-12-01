@@ -94,7 +94,7 @@ const std::string& StartupMapLoader::getName() const
 	return _name;
 }
 
-const StringSet& StartupMapLoader::getDependencies() const
+StringSet StartupMapLoader::getDependencies() const
 {
 	static StringSet _dependencies;
 

@@ -14,7 +14,6 @@
 #include "export/Lwo2Exporter.h"
 #include "export/WavefrontExporter.h"
 #include "command/ExecutionFailure.h"
-#include "os/fs.h"
 
 namespace model
 {
@@ -25,7 +24,7 @@ const std::string& ModelFormatManager::getName() const
 	return _name;
 }
 
-const StringSet& ModelFormatManager::getDependencies() const
+StringSet ModelFormatManager::getDependencies() const
 {
     static StringSet _dependencies { MODULE_COMMANDSYSTEM };
 	return _dependencies;

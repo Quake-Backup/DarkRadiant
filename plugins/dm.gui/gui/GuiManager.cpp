@@ -198,7 +198,7 @@ const std::string& GuiManager::getName() const
 	return _name;
 }
 
-const StringSet& GuiManager::getDependencies() const
+StringSet GuiManager::getDependencies() const
 {
 	static StringSet _dependencies;
 

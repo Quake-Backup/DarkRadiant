@@ -52,7 +52,7 @@ const std::string& GitModule::getName() const
     return _name;
 }
 
-const StringSet& GitModule::getDependencies() const
+StringSet GitModule::getDependencies() const
 {
     static StringSet _dependencies{ MODULE_MAINFRAME, MODULE_STATUSBARMANAGER,
         MODULE_PREFERENCESYSTEM, MODULE_MAP, MODULE_VERSION_CONTROL_MANAGER };

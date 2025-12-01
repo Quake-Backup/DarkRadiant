@@ -24,7 +24,7 @@ private:
 
 public:
 	const std::string& getName() const override;
-	const StringSet& getDependencies() const override;
+	StringSet getDependencies() const override;
 	void initialiseModule(const IApplicationContext& ctx) override;
 
 	void registerImporter(const IModelImporterPtr& importer) override;

@@ -38,7 +38,7 @@ const std::string& StatusBarManager::getName() const
     return _name;
 }
 
-const StringSet& StatusBarManager::getDependencies() const
+StringSet StatusBarManager::getDependencies() const
 {
     static StringSet _dependencies
     {

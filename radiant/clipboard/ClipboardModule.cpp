@@ -67,12 +67,6 @@ const std::string& ClipboardModule::getName() const
 	return _name;
 }
 
-const StringSet& ClipboardModule::getDependencies() const
-{
-    static StringSet _dependencies;
-	return _dependencies;
-}
-
 void ClipboardModule::initialiseModule(const IApplicationContext& ctx)
 {
     wxTheApp->Bind(wxEVT_ACTIVATE_APP, &ClipboardModule::onAppActivated, this);

@@ -18,7 +18,7 @@ public:
         return _name;
     }
 
-    const StringSet& getDependencies() const override
+    StringSet getDependencies() const override
     {
         static StringSet _dependencies{ MODULE_PREFERENCESYSTEM };
         return _dependencies;

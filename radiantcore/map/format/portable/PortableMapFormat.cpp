@@ -23,7 +23,7 @@ const std::string& PortableMapFormat::getName() const
 	return _name;
 }
 
-const StringSet& PortableMapFormat::getDependencies() const
+StringSet PortableMapFormat::getDependencies() const
 {
 	static StringSet _dependencies;
 

@@ -33,12 +33,6 @@ const std::string& VersionControlManager::getName() const
     return _name;
 }
 
-const StringSet& VersionControlManager::getDependencies() const
-{
-    static StringSet _dependencies;
-    return _dependencies;
-}
-
 module::StaticModuleRegistration<VersionControlManager> versionControlManagerModule;
 
 }

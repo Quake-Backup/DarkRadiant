@@ -43,12 +43,6 @@ const std::string& InfoFileManager::getName() const
 	return _name;
 }
 
-const StringSet& InfoFileManager::getDependencies() const
-{
-	static StringSet _dependencies;
-	return _dependencies;
-}
-
 void InfoFileManager::shutdownModule()
 {
 	rMessage() << getName() << "::shudownModule called." << std::endl;

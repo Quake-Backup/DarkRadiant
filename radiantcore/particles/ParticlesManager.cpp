@@ -94,7 +94,7 @@ const std::string& ParticlesManager::getName() const
 	return _name;
 }
 
-const StringSet& ParticlesManager::getDependencies() const
+StringSet ParticlesManager::getDependencies() const
 {
     static StringSet _dependencies
     {

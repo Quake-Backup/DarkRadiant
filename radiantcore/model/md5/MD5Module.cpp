@@ -8,8 +8,7 @@
 namespace md5
 {
 
-class MD5Module :
-	public RegisterableModule
+class MD5Module: public RegisterableModule
 {
 public:
 	// RegisterableModule implementation
@@ -19,7 +18,7 @@ public:
 		return _name;
 	}
 
-	const StringSet& getDependencies() const
+	StringSet getDependencies() const
 	{
 		static StringSet _dependencies;
 

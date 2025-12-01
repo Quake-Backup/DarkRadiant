@@ -20,10 +20,10 @@ public:
 	typedef std::shared_ptr<PortableMapFormat> Ptr;
 
 	// RegisterableModule implementation
-	virtual const std::string& getName() const override;
-	virtual const StringSet& getDependencies() const override;
-	virtual void initialiseModule(const IApplicationContext& ctx) override;
-	virtual void shutdownModule() override;
+	const std::string& getName() const override;
+	StringSet getDependencies() const override;
+	void initialiseModule(const IApplicationContext& ctx) override;
+	void shutdownModule() override;
 
 	virtual const std::string& getMapFormatName() const override;
 	virtual const std::string& getGameType() const override;

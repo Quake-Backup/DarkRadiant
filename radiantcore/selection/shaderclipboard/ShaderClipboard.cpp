@@ -205,7 +205,7 @@ const std::string& ShaderClipboard::getName() const
 	return _name;
 }
 
-const StringSet& ShaderClipboard::getDependencies() const
+StringSet ShaderClipboard::getDependencies() const
 {
     static StringSet _dependencies{ MODULE_MAP };
 	return _dependencies;

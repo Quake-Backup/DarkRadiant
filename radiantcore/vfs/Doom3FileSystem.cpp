@@ -408,12 +408,6 @@ const std::string& Doom3FileSystem::getName() const
     return _name;
 }
 
-const StringSet& Doom3FileSystem::getDependencies() const
-{
-    static StringSet _dependencies;
-    return _dependencies;
-}
-
 void Doom3FileSystem::shutdownModule()
 {
     shutdown();

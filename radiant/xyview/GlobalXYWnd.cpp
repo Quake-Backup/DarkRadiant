@@ -453,7 +453,7 @@ const std::string& XYWndManager::getName() const
 	return _name;
 }
 
-const StringSet& XYWndManager::getDependencies() const
+StringSet XYWndManager::getDependencies() const
 {
     static StringSet _dependencies
     {

@@ -94,7 +94,7 @@ const std::string& BrushModuleImpl::getName() const {
 	return _name;
 }
 
-const StringSet& BrushModuleImpl::getDependencies() const {
+StringSet BrushModuleImpl::getDependencies() const {
 	static StringSet _dependencies;
 
 	if (_dependencies.empty()) {

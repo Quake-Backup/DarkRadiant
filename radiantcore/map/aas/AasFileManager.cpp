@@ -142,7 +142,7 @@ const std::string& AasFileManager::getName() const
 	return _name;
 }
 
-const StringSet& AasFileManager::getDependencies() const
+StringSet AasFileManager::getDependencies() const
 {
 	static StringSet _dependencies;
 

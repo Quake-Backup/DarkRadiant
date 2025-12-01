@@ -16,7 +16,7 @@ const std::string& LocalisationModule::getName() const
 	return _name;
 }
 
-const StringSet& LocalisationModule::getDependencies() const
+StringSet LocalisationModule::getDependencies() const
 {
 	static StringSet _dependencies;
 

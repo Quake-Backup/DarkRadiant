@@ -44,7 +44,7 @@ const std::string& PatchModule::getName() const
 	return _name;
 }
 
-const StringSet& PatchModule::getDependencies() const
+StringSet PatchModule::getDependencies() const
 {
 	static StringSet _dependencies;
 

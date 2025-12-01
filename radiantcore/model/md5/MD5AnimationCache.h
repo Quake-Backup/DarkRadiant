@@ -22,7 +22,7 @@ public:
 
 	// RegisterableModule implementation
 	const std::string& getName() const;
-	const StringSet& getDependencies() const;
+	StringSet getDependencies() const;
 	void shutdownModule();
 };
 typedef std::shared_ptr<MD5AnimationCache> MD5AnimationCachePtr;

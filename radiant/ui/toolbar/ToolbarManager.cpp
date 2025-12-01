@@ -24,7 +24,7 @@ const std::string& ToolbarManager::getName() const
     return _name;
 }
 
-const StringSet& ToolbarManager::getDependencies() const
+StringSet ToolbarManager::getDependencies() const
 {
     static StringSet _dependencies;
 

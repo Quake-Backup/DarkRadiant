@@ -45,7 +45,7 @@ const std::string& MD5AnimationCache::getName() const
 	return _name;
 }
 
-const StringSet& MD5AnimationCache::getDependencies() const
+StringSet MD5AnimationCache::getDependencies() const
 {
 	static StringSet _dependencies;
 

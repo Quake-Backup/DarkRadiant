@@ -37,7 +37,7 @@ const std::string& GridManager::getName() const
 	return _name;
 }
 
-const StringSet& GridManager::getDependencies() const
+StringSet GridManager::getDependencies() const
 {
 	static StringSet _dependencies;
 

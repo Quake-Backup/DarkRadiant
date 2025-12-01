@@ -954,7 +954,7 @@ const std::string& DeclarationManager::getName() const
     return _name;
 }
 
-const StringSet& DeclarationManager::getDependencies() const
+StringSet DeclarationManager::getDependencies() const
 {
     static StringSet _dependencies
     {

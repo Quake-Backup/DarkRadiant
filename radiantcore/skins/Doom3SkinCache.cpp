@@ -124,7 +124,7 @@ const std::string& Doom3SkinCache::getName() const
 	return _name;
 }
 
-const StringSet& Doom3SkinCache::getDependencies() const
+StringSet Doom3SkinCache::getDependencies() const
 {
 	static StringSet _dependencies;
 

@@ -108,7 +108,7 @@ const std::string& TextureBrowserManager::getName() const
     return _name;
 }
 
-const StringSet& TextureBrowserManager::getDependencies() const
+StringSet TextureBrowserManager::getDependencies() const
 {
     static StringSet _dependencies;
 

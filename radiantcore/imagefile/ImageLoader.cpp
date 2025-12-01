@@ -6,8 +6,6 @@
 #include "dds.h"
 
 #include "ifilesystem.h"
-#include "iarchive.h"
-#include "iregistry.h"
 #include "igame.h"
 
 #include "string/case_conv.h"
@@ -129,7 +127,7 @@ const std::string& ImageLoader::getName() const
     return _name;
 }
 
-const StringSet& ImageLoader::getDependencies() const
+StringSet ImageLoader::getDependencies() const
 {
     static StringSet _dependencies;
 

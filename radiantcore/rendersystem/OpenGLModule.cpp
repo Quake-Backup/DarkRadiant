@@ -83,7 +83,7 @@ const std::string& OpenGLModule::getName() const
 	return _name;
 }
 
-const StringSet& OpenGLModule::getDependencies() const
+StringSet OpenGLModule::getDependencies() const
 {
 	static StringSet _dependencies;
 

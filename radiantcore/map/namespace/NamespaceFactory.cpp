@@ -15,12 +15,5 @@ const std::string& NamespaceFactory::getName() const
 	return _name;
 }
 
-const StringSet& NamespaceFactory::getDependencies() const
-{
-	static StringSet _dependencies;
-	// no dependencies
-	return _dependencies;
-}
-
 // Define the static NamespaceFactoryModule
 module::StaticModuleRegistration<NamespaceFactory> namespaceFactoryModule;

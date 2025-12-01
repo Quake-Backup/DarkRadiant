@@ -21,8 +21,8 @@ public:
 	ExportEvent& signal_onResourceExported() override;
 
 	// RegisterableModule implementation
-	virtual const std::string& getName() const override;
-	virtual const StringSet& getDependencies() const override;
+	const std::string& getName() const override;
+	StringSet getDependencies() const override;
 };
 
 }

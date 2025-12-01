@@ -32,7 +32,7 @@ const std::string& CommandSystem::getName() const {
 	return _name;
 }
 
-const StringSet& CommandSystem::getDependencies() const {
+StringSet CommandSystem::getDependencies() const {
 	static StringSet _dependencies;
 
 	if (_dependencies.empty())

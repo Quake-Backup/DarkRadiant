@@ -253,7 +253,7 @@ const std::string& MenuManager::getName() const
     return _name;
 }
 
-const StringSet& MenuManager::getDependencies() const
+StringSet MenuManager::getDependencies() const
 {
     static StringSet _dependencies
     {

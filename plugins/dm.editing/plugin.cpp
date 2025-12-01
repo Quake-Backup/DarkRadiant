@@ -12,7 +12,6 @@
 #include "AIHeadPropertyEditor.h"
 #include "AIVocalSetPropertyEditor.h"
 #include "FixupMapDialog.h"
-#include "AIEditingPanel.h"
 #include "MissionInfoEditDialog.h"
 
 class EditingModule :
@@ -26,7 +25,7 @@ public:
 		return _name;
 	}
 
-	const StringSet& getDependencies() const override
+	StringSet getDependencies() const override
     {
         static StringSet _dependencies
         {
@@ -72,7 +71,7 @@ public:
 			"MissionInfoEditDialog"
 		);
 
-		GlobalMainFrame().signal_MainFrameConstructed().connect([this] 
+		GlobalMainFrame().signal_MainFrameConstructed().connect([this]
         {
             GlobalMainFrame().addControl(ui::AIEditingControl::Name, IMainFrame::ControlSettings
             {

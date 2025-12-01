@@ -42,7 +42,7 @@ public:
         return _name;
     }
 
-    const StringSet& getDependencies() const override
+    StringSet getDependencies() const override
     {
         static StringSet _dependencies
         {

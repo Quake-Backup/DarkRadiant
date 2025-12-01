@@ -64,12 +64,6 @@ const std::string& CounterManager::getName() const
 	return _name;
 }
 
-const StringSet& CounterManager::getDependencies() const
-{
-	static StringSet _dependencies;
-	return _dependencies;
-}
-
 // Register the counter module in the registry
 module::StaticModuleRegistration<CounterManager> counterManagerModule;
 

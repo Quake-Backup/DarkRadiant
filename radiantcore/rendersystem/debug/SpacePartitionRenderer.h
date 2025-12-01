@@ -2,7 +2,6 @@
 #define _SPACE_PARTITION_RENDERER_H_
 
 #include "icommandsystem.h"
-#include "iscenegraph.h"
 
 #include "render/RenderableSpacePartition.h"
 
@@ -15,7 +14,7 @@ class SpacePartitionRenderer : public RegisterableModule
 
 public:
 	const std::string& getName() const;
-	const StringSet& getDependencies() const;
+	StringSet getDependencies() const;
 	void initialiseModule(const IApplicationContext& ctx);
 	void shutdownModule();
 

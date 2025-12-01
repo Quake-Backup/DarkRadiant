@@ -38,7 +38,7 @@
 #include <functional>
 #include "string/case_conv.h"
 
-namespace script 
+namespace script
 {
 
 namespace
@@ -110,14 +110,14 @@ void ScriptingSystem::runScriptFile(const cmd::ArgumentList& args)
 	executeScriptFile(args[0].getString());
 }
 
-void ScriptingSystem::runScriptCommand(const cmd::ArgumentList& args) 
+void ScriptingSystem::runScriptCommand(const cmd::ArgumentList& args)
 {
 	if (args.empty()) return;
 
 	executeCommand(args[0].getString());
 }
 
-void ScriptingSystem::reloadScriptsCmd(const cmd::ArgumentList& args) 
+void ScriptingSystem::reloadScriptsCmd(const cmd::ArgumentList& args)
 {
 	reloadScripts();
 }
@@ -216,7 +216,7 @@ const std::string& ScriptingSystem::getName() const
 	return _name;
 }
 
-const StringSet& ScriptingSystem::getDependencies() const
+StringSet ScriptingSystem::getDependencies() const
 {
 	static StringSet _dependencies;
 

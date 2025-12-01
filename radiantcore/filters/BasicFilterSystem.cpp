@@ -544,7 +544,7 @@ const std::string& BasicFilterSystem::getName() const
     return _name;
 }
 
-const StringSet& BasicFilterSystem::getDependencies() const
+StringSet BasicFilterSystem::getDependencies() const
 {
     static StringSet _dependencies;
 

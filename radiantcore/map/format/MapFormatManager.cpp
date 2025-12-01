@@ -107,12 +107,6 @@ const std::string& MapFormatManager::getName() const
 	return _name;
 }
 
-const StringSet& MapFormatManager::getDependencies() const
-{
-	static StringSet _dependencies; // no deps
-	return _dependencies;
-}
-
 // Creates the static module instance
 module::StaticModuleRegistration<MapFormatManager> staticMapFormatManagerModule;
 

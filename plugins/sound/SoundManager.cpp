@@ -106,7 +106,7 @@ const std::string& SoundManager::getName() const
 	return _name;
 }
 
-const StringSet& SoundManager::getDependencies() const
+StringSet SoundManager::getDependencies() const
 {
     static StringSet _dependencies
     {

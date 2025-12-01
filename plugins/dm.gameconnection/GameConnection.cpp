@@ -807,7 +807,7 @@ const std::string& GameConnection::getName() const
     return _name;
 }
 
-const StringSet& GameConnection::getDependencies() const
+StringSet GameConnection::getDependencies() const
 {
     static StringSet _dependencies {
         MODULE_CAMERA_MANAGER, MODULE_COMMANDSYSTEM, MODULE_MAP,

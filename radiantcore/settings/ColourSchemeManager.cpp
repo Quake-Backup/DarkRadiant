@@ -204,7 +204,7 @@ const std::string& ColourSchemeManager::getName() const
 	return _name;
 }
 
-const StringSet& ColourSchemeManager::getDependencies() const
+StringSet ColourSchemeManager::getDependencies() const
 {
 	static StringSet _dependencies;
 

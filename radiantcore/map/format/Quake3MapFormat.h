@@ -10,9 +10,9 @@ class Quake3MapFormatBase :
 {
 public:
 	// RegisterableModule implementation
-	virtual const StringSet& getDependencies() const override;
-	virtual void initialiseModule(const IApplicationContext& ctx) override;
-	virtual void shutdownModule() override;
+	StringSet getDependencies() const override;
+	void initialiseModule(const IApplicationContext& ctx) override;
+	void shutdownModule() override;
 
     // Map reader is shared by Q3 and Q3 alternate
 	virtual IMapReaderPtr getMapReader(IMapImportFilter& filter) const override;

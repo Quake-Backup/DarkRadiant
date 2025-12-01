@@ -460,7 +460,7 @@ const std::string& CameraWndManager::getName() const
 	return _name;
 }
 
-const StringSet& CameraWndManager::getDependencies() const
+StringSet CameraWndManager::getDependencies() const
 {
     static StringSet _dependencies
     {

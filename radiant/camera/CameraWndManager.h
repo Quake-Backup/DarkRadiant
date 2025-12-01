@@ -94,7 +94,7 @@ public:
 
 public:
     void foreachCamWnd(const std::function<void(CamWnd&)>& action);
-	
+
     // Callbacks for the named camera KeyEvents
 	void onMoveForwardKey(KeyEventType eventType);
 	void onMoveBackKey(KeyEventType eventType);
@@ -105,7 +105,7 @@ public:
 
 	// RegisterableModule implementation
 	const std::string& getName() const override;
-	const StringSet& getDependencies() const override;
+	StringSet getDependencies() const override;
 	void initialiseModule(const IApplicationContext& ctx) override;
 	void shutdownModule() override;
 

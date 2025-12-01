@@ -26,7 +26,7 @@ const std::string& SpacePartitionRenderer::getName() const
 	return _name;
 }
 
-const StringSet& SpacePartitionRenderer::getDependencies() const
+StringSet SpacePartitionRenderer::getDependencies() const
 {
 	static StringSet _dependencies;
 

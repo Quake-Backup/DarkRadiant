@@ -248,7 +248,7 @@ const std::string& Clipper::getName() const {
 	return _name;
 }
 
-const StringSet& Clipper::getDependencies() const {
+StringSet Clipper::getDependencies() const {
 	static StringSet _dependencies;
 
 	if (_dependencies.empty())

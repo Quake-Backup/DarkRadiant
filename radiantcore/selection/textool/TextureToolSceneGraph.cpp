@@ -24,7 +24,7 @@ const std::string& TextureToolSceneGraph::getName() const
     return _name;
 }
 
-const StringSet& TextureToolSceneGraph::getDependencies() const
+StringSet TextureToolSceneGraph::getDependencies() const
 {
     static StringSet _dependencies{ MODULE_SELECTIONSYSTEM };
     return _dependencies;

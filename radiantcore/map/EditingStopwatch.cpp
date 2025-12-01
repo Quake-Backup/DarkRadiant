@@ -34,7 +34,7 @@ const std::string& EditingStopwatch::getName() const
 	return _name;
 }
 
-const StringSet& EditingStopwatch::getDependencies() const
+StringSet EditingStopwatch::getDependencies() const
 {
 	static StringSet _dependencies;
 

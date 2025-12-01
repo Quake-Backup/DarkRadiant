@@ -52,7 +52,7 @@ const std::string& EventManager::getName() const
 	return _name;
 }
 
-const StringSet& EventManager::getDependencies() const
+StringSet EventManager::getDependencies() const
 {
 	static StringSet _dependencies;
 

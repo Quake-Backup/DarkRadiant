@@ -117,7 +117,6 @@ class SceneGraphModule :
 public:
 	// RegisterableModule implementation
 	const std::string& getName() const;
-	const StringSet& getDependencies() const;
 };
 typedef std::shared_ptr<SceneGraphModule> SceneGraphModulePtr;
 

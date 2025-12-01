@@ -5,14 +5,12 @@
 #include "Quake3MapReader.h"
 #include "Quake3MapWriter.h"
 
-#include "Doom3MapFormat.h"
-
 #include "module/StaticModule.h"
 
 namespace map
 {
 
-const StringSet& Quake3MapFormatBase::getDependencies() const
+StringSet Quake3MapFormatBase::getDependencies() const
 {
 	static StringSet _dependencies;
 

@@ -1505,7 +1505,7 @@ const std::string& Map::getName() const
     return _name;
 }
 
-const StringSet& Map::getDependencies() const
+StringSet Map::getDependencies() const
 {
     static StringSet _dependencies
     {

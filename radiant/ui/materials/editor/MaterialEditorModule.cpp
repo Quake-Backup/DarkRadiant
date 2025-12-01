@@ -3,7 +3,6 @@
 #include "i18n.h"
 #include "imodule.h"
 #include "icommandsystem.h"
-#include "itextstream.h"
 #include "ui/imenumanager.h"
 #include "module/StaticModule.h"
 
@@ -21,7 +20,7 @@ public:
         return _name;
     }
 
-    const StringSet& getDependencies() const override
+    StringSet getDependencies() const override
     {
         static StringSet _dependencies
         {

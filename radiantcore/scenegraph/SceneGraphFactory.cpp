@@ -16,10 +16,4 @@ const std::string& SceneGraphFactory::getName() const
 	return _name;
 }
 
-const StringSet& SceneGraphFactory::getDependencies() const
-{
-	static StringSet _dependencies; // no dependencies
-	return _dependencies;
-}
-
 } // namespace

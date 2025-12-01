@@ -27,7 +27,7 @@ const std::string& GridUserInterface::getName() const
 	return _name;
 }
 
-const StringSet& GridUserInterface::getDependencies() const
+StringSet GridUserInterface::getDependencies() const
 {
 	static StringSet _dependencies;
 

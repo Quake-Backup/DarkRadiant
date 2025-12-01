@@ -17,12 +17,10 @@
 #include "ui/imainframe.h"
 #include "imap.h"
 #include "ipreferencesystem.h"
-#include "iradiant.h"
 #include "iregistry.h"
 #include "irender.h"
 #include "ishaders.h"
 #include "ui/imenumanager.h"
-#include "iarchive.h"
 
 class GuiModule :
 	public RegisterableModule,
@@ -36,7 +34,7 @@ public:
 		return _name;
 	}
 
-	const StringSet& getDependencies() const override
+	StringSet getDependencies() const override
 	{
         static StringSet _dependencies
         {

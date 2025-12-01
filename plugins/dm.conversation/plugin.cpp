@@ -1,11 +1,8 @@
 #include "imodule.h"
 
 #include "i18n.h"
-#include "itextstream.h"
 #include "icommandsystem.h"
 #include "ui/imenumanager.h"
-#include "generic/callback.h"
-#include "debugging/debugging.h"
 
 #include "ConversationDialog.h"
 
@@ -22,7 +19,7 @@ public:
 		return _name;
 	}
 
-	virtual const StringSet& getDependencies() const
+	StringSet getDependencies() const
     {
         static StringSet _dependencies
         {

@@ -3,8 +3,6 @@
 #include "ui/idialogmanager.h"
 #include <list>
 
-#include "wxutil/dialog/Dialog.h"
-
 namespace ui
 {
 
@@ -27,7 +25,7 @@ public:
 								IDialog::MessageType type,
 								wxWindow* parent = nullptr) override;
 
-	IFileChooserPtr createFileChooser(const std::string& title, bool open, 
+	IFileChooserPtr createFileChooser(const std::string& title, bool open,
 		const std::string& pattern, const std::string& defaultExt) override;
 
 	IDirChooserPtr createDirChooser(const std::string& title) override;
@@ -37,7 +35,7 @@ public:
 
     // RegisterableModule
     const std::string& getName() const override;
-    const StringSet& getDependencies() const override;
+    StringSet getDependencies() const override;
     void initialiseModule(const IApplicationContext& ctx) override;
 
 private:

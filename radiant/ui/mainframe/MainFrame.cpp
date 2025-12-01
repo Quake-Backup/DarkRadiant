@@ -20,7 +20,6 @@
 #include "ui/mainframe/ScreenUpdateBlocker.h"
 #include "ui/mainframe/AuiLayout.h"
 #include "ui/mainframe/TopLevelFrame.h"
-#include "textool/TexTool.h"
 
 #include "module/StaticModule.h"
 #include "messages/ApplicationShutdownRequest.h"
@@ -52,7 +51,7 @@ const std::string& MainFrame::getName() const
     return _name;
 }
 
-const StringSet& MainFrame::getDependencies() const
+StringSet MainFrame::getDependencies() const
 {
     static StringSet _dependencies = {
         MODULE_XMLREGISTRY,

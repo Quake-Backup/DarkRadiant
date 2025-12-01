@@ -34,12 +34,6 @@ public:
         static std::string _name(MODULE_CLIPBOARD);
         return _name;
     }
-
-    const StringSet& getDependencies() const override
-    {
-        static StringSet _dependencies;
-        return _dependencies;
-    }
 };
 
 }

@@ -1,6 +1,5 @@
 #include "RenderSystemFactory.h"
 
-#include "itextstream.h"
 #include "module/StaticModule.h"
 
 #include "OpenGLRenderSystem.h"
@@ -17,12 +16,6 @@ const std::string& RenderSystemFactory::getName() const
 {
 	static std::string _name(MODULE_RENDERSYSTEMFACTORY);
 	return _name;
-}
-
-const StringSet& RenderSystemFactory::getDependencies() const
-{
-	static StringSet _dependencies; // no dependencies
-	return _dependencies;
 }
 
 // Define the static RenderSystemFactory module

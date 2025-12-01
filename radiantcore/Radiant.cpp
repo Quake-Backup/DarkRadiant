@@ -128,12 +128,6 @@ const std::string& Radiant::getName() const
 	return _name;
 }
 
-const StringSet& Radiant::getDependencies() const
-{
-	static StringSet _dependencies;
-	return _dependencies;
-}
-
 std::shared_ptr<Radiant>& Radiant::InstancePtr()
 {
 	static std::shared_ptr<Radiant> _instancePtr;

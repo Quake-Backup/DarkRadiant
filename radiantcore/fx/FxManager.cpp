@@ -19,7 +19,7 @@ const std::string& FxManager::getName() const
 	return _name;
 }
 
-const StringSet& FxManager::getDependencies() const
+StringSet FxManager::getDependencies() const
 {
     static StringSet _dependencies
     {

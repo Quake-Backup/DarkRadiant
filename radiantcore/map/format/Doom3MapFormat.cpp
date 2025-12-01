@@ -1,9 +1,5 @@
 #include "Doom3MapFormat.h"
-
-#include "itextstream.h"
-
 #include "parser/DefTokeniser.h"
-
 #include "Doom3MapReader.h"
 #include "Doom3MapWriter.h"
 
@@ -18,7 +14,7 @@ const std::string& Doom3MapFormat::getName() const {
 	return _name;
 }
 
-const StringSet& Doom3MapFormat::getDependencies() const
+StringSet Doom3MapFormat::getDependencies() const
 {
 	static StringSet _dependencies;
 

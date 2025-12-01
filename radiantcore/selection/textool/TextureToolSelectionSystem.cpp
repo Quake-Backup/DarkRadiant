@@ -24,7 +24,7 @@ const std::string& TextureToolSelectionSystem::getName() const
     return _name;
 }
 
-const StringSet& TextureToolSelectionSystem::getDependencies() const
+StringSet TextureToolSelectionSystem::getDependencies() const
 {
     static StringSet _dependencies{ MODULE_TEXTOOL_SCENEGRAPH,
         MODULE_COMMANDSYSTEM, MODULE_RADIANT_CORE };

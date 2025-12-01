@@ -64,12 +64,6 @@ const std::string& EClassColourManager::getName() const
     return _name;
 }
 
-const StringSet& EClassColourManager::getDependencies() const
-{
-    static StringSet _dependencies;
-    return _dependencies;
-}
-
 module::StaticModuleRegistration<EClassColourManager> eclassColourManagerModule;
 
 }

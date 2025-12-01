@@ -49,10 +49,4 @@ const std::string& TestOrthoViewManager::getName() const
     return _name;
 }
 
-const StringSet& TestOrthoViewManager::getDependencies() const
-{
-    static StringSet _dependencies;
-    return _dependencies;
-}
-
 }

@@ -359,12 +359,6 @@ const std::string& SceneGraphModule::getName() const
 	return _name;
 }
 
-const StringSet& SceneGraphModule::getDependencies() const
-{
-	static StringSet _dependencies; // no deps
-	return _dependencies;
-}
-
 // Static module instances
 module::StaticModuleRegistration<SceneGraphModule> sceneGraphModule;
 module::StaticModuleRegistration<SceneGraphFactory> sceneGraphFactory;

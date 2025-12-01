@@ -33,12 +33,6 @@ const std::string& PreferenceSystem::getName() const
     return _name;
 }
 
-const StringSet& PreferenceSystem::getDependencies() const
-{
-    static StringSet _dependencies;
-    return _dependencies;
-}
-
 // Define the static PreferenceSystem module
 module::StaticModuleRegistration<PreferenceSystem> preferenceSystemModule;
 

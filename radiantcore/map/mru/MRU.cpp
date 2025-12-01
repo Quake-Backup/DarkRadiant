@@ -135,7 +135,7 @@ const std::string& MRU::getName() const
 	return _name;
 }
 
-const StringSet& MRU::getDependencies() const
+StringSet MRU::getDependencies() const
 {
 	static StringSet _dependencies;
 

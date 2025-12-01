@@ -5,7 +5,6 @@
 #include "Quake4MapReader.h"
 #include "Quake4MapWriter.h"
 
-#include "Doom3MapFormat.h"
 #include "module/StaticModule.h"
 
 namespace map
@@ -18,7 +17,7 @@ const std::string& Quake4MapFormat::getName() const
 	return _name;
 }
 
-const StringSet& Quake4MapFormat::getDependencies() const
+StringSet Quake4MapFormat::getDependencies() const
 {
 	static StringSet _dependencies;
 

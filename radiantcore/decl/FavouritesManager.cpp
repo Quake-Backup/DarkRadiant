@@ -98,7 +98,7 @@ const std::string& FavouritesManager::getName() const
     return _name;
 }
 
-const StringSet& FavouritesManager::getDependencies() const
+StringSet FavouritesManager::getDependencies() const
 {
     static StringSet _dependencies;
 

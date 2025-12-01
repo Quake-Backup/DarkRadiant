@@ -51,7 +51,7 @@ const std::string& EntityInspectorModule::getName() const
     return _name;
 }
 
-const StringSet& EntityInspectorModule::getDependencies() const
+StringSet EntityInspectorModule::getDependencies() const
 {
     static StringSet _dependencies
     {

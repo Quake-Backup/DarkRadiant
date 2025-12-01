@@ -6,8 +6,8 @@
 #include "iselection.h"
 #include "i18n.h"
 
-#include "entitylib.h"
 #include "gamelib.h"
+#include "scenelib.h"
 #include "selectionlib.h"
 
 #include "string/replace.h"
@@ -24,8 +24,6 @@
 #include "module/StaticModule.h"
 #include "selection/algorithm/General.h"
 #include "selection/algorithm/Group.h"
-#include "selection/algorithm/Entity.h"
-#include "selection/algorithm/Shader.h"
 #include "command/ExecutionFailure.h"
 #include "eclass.h"
 #include "algorithm/Speaker.h"
@@ -264,7 +262,7 @@ const std::string& Doom3EntityModule::getName() const
 	return _name;
 }
 
-const StringSet& Doom3EntityModule::getDependencies() const
+StringSet Doom3EntityModule::getDependencies() const
 {
 	static StringSet _dependencies;
 

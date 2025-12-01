@@ -583,7 +583,7 @@ const std::string& OrthoContextMenu::getName() const
     return _name;
 }
 
-const StringSet& OrthoContextMenu::getDependencies() const
+StringSet OrthoContextMenu::getDependencies() const
 {
     static StringSet _dependencies
     {

@@ -53,12 +53,6 @@ const std::string& SharedOpenGLContextModule::getName() const
 	return _name;
 }
 
-const StringSet& SharedOpenGLContextModule::getDependencies() const
-{
-	static StringSet _dependencies;
-	return _dependencies;
-}
-
 void SharedOpenGLContextModule::shutdownModule()
 {
 	_sigSharedContextCreated.clear();

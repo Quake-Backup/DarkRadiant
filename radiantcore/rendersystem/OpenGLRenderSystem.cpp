@@ -4,11 +4,9 @@
 #include "igl.h"
 #include "itextstream.h"
 #include "iregistry.h"
-#include "iradiant.h"
 #include "icolourscheme.h"
 #include "ideclmanager.h"
 
-#include "math/Matrix4.h"
 #include "module/StaticModule.h"
 #include "backend/GLProgramFactory.h"
 #include "backend/BuiltInShader.h"
@@ -376,7 +374,7 @@ const std::string& OpenGLRenderSystem::getName() const
     return _name;
 }
 
-const StringSet& OpenGLRenderSystem::getDependencies() const
+StringSet OpenGLRenderSystem::getDependencies() const
 {
     static StringSet _dependencies
 	{

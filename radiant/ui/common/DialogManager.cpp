@@ -3,6 +3,7 @@
 #include "itextstream.h"
 #include "ui/imainframe.h"
 
+#include "wxutil/dialog/Dialog.h"
 #include "wxutil/dialog/MessageBox.h"
 #include "wxutil/FileChooser.h"
 #include "wxutil/DirChooser.h"
@@ -30,7 +31,7 @@ const std::string& DialogManager::getName() const
     return _name;
 }
 
-const StringSet& DialogManager::getDependencies() const
+StringSet DialogManager::getDependencies() const
 {
     static StringSet _dependencies
     {

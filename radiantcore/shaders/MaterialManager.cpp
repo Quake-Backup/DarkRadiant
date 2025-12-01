@@ -299,7 +299,7 @@ const std::string& MaterialManager::getName() const
     return _name;
 }
 
-const StringSet& MaterialManager::getDependencies() const
+StringSet MaterialManager::getDependencies() const
 {
     static StringSet _dependencies
     {

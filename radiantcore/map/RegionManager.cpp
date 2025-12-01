@@ -424,7 +424,7 @@ const std::string& RegionManager::getName() const
 	return _name;
 }
 
-const StringSet& RegionManager::getDependencies() const
+StringSet RegionManager::getDependencies() const
 {
 	static StringSet _dependencies;
 

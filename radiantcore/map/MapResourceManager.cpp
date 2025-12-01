@@ -45,7 +45,7 @@ const std::string& MapResourceManager::getName() const
 	return _name;
 }
 
-const StringSet& MapResourceManager::getDependencies() const
+StringSet MapResourceManager::getDependencies() const
 {
 	static StringSet _dependencies;
 

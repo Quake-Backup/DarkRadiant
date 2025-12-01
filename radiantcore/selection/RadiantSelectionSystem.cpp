@@ -969,7 +969,7 @@ const std::string& RadiantSelectionSystem::getName() const
     return _name;
 }
 
-const StringSet& RadiantSelectionSystem::getDependencies() const
+StringSet RadiantSelectionSystem::getDependencies() const
 {
     static StringSet _dependencies;
 
