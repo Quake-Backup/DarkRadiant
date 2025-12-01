@@ -1,6 +1,5 @@
 #include "VersionControlManager.h"
 
-#include "itextstream.h"
 #include "module/StaticModule.h"
 
 namespace vcs
@@ -38,10 +37,6 @@ const StringSet& VersionControlManager::getDependencies() const
 {
     static StringSet _dependencies;
     return _dependencies;
-}
-
-void VersionControlManager::initialiseModule(const IApplicationContext& ctx)
-{
 }
 
 module::StaticModuleRegistration<VersionControlManager> versionControlManagerModule;

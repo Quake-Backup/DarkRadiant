@@ -155,10 +155,6 @@ const StringSet& AasFileManager::getDependencies() const
 	return _dependencies;
 }
 
-void AasFileManager::initialiseModule(const IApplicationContext& ctx)
-{
-}
-
 // Define the static AasFileManager module
 module::StaticModuleRegistration<AasFileManager> aasFileManagerModule;
 

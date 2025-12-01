@@ -55,9 +55,4 @@ const StringSet& TestOrthoViewManager::getDependencies() const
     return _dependencies;
 }
 
-void TestOrthoViewManager::initialiseModule(const IApplicationContext& ctx)
-{
-    // do nothing
-}
-
 }

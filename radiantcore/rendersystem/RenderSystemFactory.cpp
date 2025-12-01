@@ -25,10 +25,6 @@ const StringSet& RenderSystemFactory::getDependencies() const
 	return _dependencies;
 }
 
-void RenderSystemFactory::initialiseModule(const IApplicationContext& ctx)
-{
-}
-
 // Define the static RenderSystemFactory module
 module::StaticModuleRegistration<RenderSystemFactory> renderSystemFactory;
 

@@ -59,10 +59,6 @@ const StringSet& MapResourceManager::getDependencies() const
 	return _dependencies;
 }
 
-void MapResourceManager::initialiseModule(const IApplicationContext& ctx)
-{
-}
-
 // Define the MapResourceManager registerable module
 module::StaticModuleRegistration<MapResourceManager> mapResourceManagerModule;
 

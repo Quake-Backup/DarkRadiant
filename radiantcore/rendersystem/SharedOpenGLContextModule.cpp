@@ -1,7 +1,6 @@
 #include "SharedOpenGLContextModule.h"
 
 #include <stdexcept>
-#include "itextstream.h"
 
 #include "module/StaticModule.h"
 
@@ -58,10 +57,6 @@ const StringSet& SharedOpenGLContextModule::getDependencies() const
 {
 	static StringSet _dependencies;
 	return _dependencies;
-}
-
-void SharedOpenGLContextModule::initialiseModule(const IApplicationContext& ctx)
-{
 }
 
 void SharedOpenGLContextModule::shutdownModule()

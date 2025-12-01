@@ -1,6 +1,5 @@
 #include "SceneGraphFactory.h"
 
-#include "itextstream.h"
 #include "SceneGraph.h"
 
 namespace scene
@@ -21,10 +20,6 @@ const StringSet& SceneGraphFactory::getDependencies() const
 {
 	static StringSet _dependencies; // no dependencies
 	return _dependencies;
-}
-
-void SceneGraphFactory::initialiseModule(const IApplicationContext& ctx)
-{
 }
 
 } // namespace

@@ -113,10 +113,6 @@ const StringSet& MapFormatManager::getDependencies() const
 	return _dependencies;
 }
 
-void MapFormatManager::initialiseModule(const IApplicationContext& ctx)
-{
-}
-
 // Creates the static module instance
 module::StaticModuleRegistration<MapFormatManager> staticMapFormatManagerModule;
 

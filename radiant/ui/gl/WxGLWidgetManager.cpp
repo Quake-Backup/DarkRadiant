@@ -45,10 +45,6 @@ const StringSet& WxGLWidgetManager::getDependencies() const
 	return _dependencies;
 }
 
-void WxGLWidgetManager::initialiseModule(const IApplicationContext& ctx)
-{
-}
-
 void WxGLWidgetManager::shutdownModule()
 {
 	_wxGLWidgets.clear();

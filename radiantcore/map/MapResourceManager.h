@@ -1,7 +1,6 @@
 #pragma once
 
 #include "imapresource.h"
-#include "map/MapResource.h"
 
 namespace map
 {
@@ -24,7 +23,6 @@ public:
 	// RegisterableModule implementation
 	virtual const std::string& getName() const override;
 	virtual const StringSet& getDependencies() const override;
-	virtual void initialiseModule(const IApplicationContext& ctx) override;
 };
 
 }

@@ -31,8 +31,6 @@ public:
 		return _dependencies;
 	}
 
-	void initialiseModule(const IApplicationContext& ctx) override;
-
 	void shutdownModule() override
 	{
 		GlobalOpenGLContext().setSharedContext(IGLContext::Ptr());

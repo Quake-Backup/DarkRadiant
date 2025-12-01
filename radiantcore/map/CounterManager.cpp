@@ -70,10 +70,6 @@ const StringSet& CounterManager::getDependencies() const
 	return _dependencies;
 }
 
-void CounterManager::initialiseModule(const IApplicationContext& ctx)
-{
-}
-
 // Register the counter module in the registry
 module::StaticModuleRegistration<CounterManager> counterManagerModule;
 

@@ -1,12 +1,7 @@
 #include "SceneGraph.h"
 
 #include "ivolumetest.h"
-#include "itextstream.h"
-
 #include "scene/InstanceWalkers.h"
-#include "debugging/debugging.h"
-
-#include "math/AABB.h"
 #include "Octree.h"
 #include "SceneGraphFactory.h"
 #include "util/ScopedBoolLock.h"
@@ -368,10 +363,6 @@ const StringSet& SceneGraphModule::getDependencies() const
 {
 	static StringSet _dependencies; // no deps
 	return _dependencies;
-}
-
-void SceneGraphModule::initialiseModule(const IApplicationContext& ctx)
-{
 }
 
 // Static module instances

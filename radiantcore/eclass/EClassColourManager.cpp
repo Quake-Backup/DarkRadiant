@@ -1,6 +1,5 @@
 #include "EClassColourManager.h"
 
-#include "itextstream.h"
 #include "module/StaticModule.h"
 
 namespace eclass
@@ -69,10 +68,6 @@ const StringSet& EClassColourManager::getDependencies() const
 {
     static StringSet _dependencies;
     return _dependencies;
-}
-
-void EClassColourManager::initialiseModule(const IApplicationContext& ctx)
-{
 }
 
 module::StaticModuleRegistration<EClassColourManager> eclassColourManagerModule;

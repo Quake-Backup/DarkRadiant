@@ -28,7 +28,7 @@ IMD5AnimPtr MD5AnimationCache::getAnim(const std::string& vfsPath)
 	}
 
 	std::istream inputStream(&file->getInputStream());
-	
+
 	// Create the anim from scratch
 	MD5AnimPtr anim(new MD5Anim);
 	anim->parseFromStream(inputStream);
@@ -55,10 +55,6 @@ const StringSet& MD5AnimationCache::getDependencies() const
 	}
 
 	return _dependencies;
-}
-
-void MD5AnimationCache::initialiseModule(const IApplicationContext& ctx)
-{
 }
 
 void MD5AnimationCache::shutdownModule()

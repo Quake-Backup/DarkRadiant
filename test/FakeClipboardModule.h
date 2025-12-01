@@ -40,9 +40,6 @@ public:
         static StringSet _dependencies;
         return _dependencies;
     }
-
-    void initialiseModule(const IApplicationContext& ctx) override
-    {}
 };
 
 }

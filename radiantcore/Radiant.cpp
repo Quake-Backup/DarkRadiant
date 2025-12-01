@@ -134,9 +134,6 @@ const StringSet& Radiant::getDependencies() const
 	return _dependencies;
 }
 
-void Radiant::initialiseModule(const IApplicationContext& ctx)
-{}
-
 std::shared_ptr<Radiant>& Radiant::InstancePtr()
 {
 	static std::shared_ptr<Radiant> _instancePtr;

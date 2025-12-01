@@ -1,5 +1,4 @@
 #include "NamespaceFactory.h"
-#include "itextstream.h"
 
 #include "Namespace.h"
 #include "module/StaticModule.h"
@@ -21,10 +20,6 @@ const StringSet& NamespaceFactory::getDependencies() const
 	static StringSet _dependencies;
 	// no dependencies
 	return _dependencies;
-}
-
-void NamespaceFactory::initialiseModule(const IApplicationContext& ctx)
-{
 }
 
 // Define the static NamespaceFactoryModule
