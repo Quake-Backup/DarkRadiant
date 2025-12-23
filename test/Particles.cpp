@@ -4,6 +4,7 @@
 #include "iparticlestage.h"
 #include "os/path.h"
 #include "string/replace.h"
+#include "math/Vector4.h"
 #include "algorithm/FileUtils.h"
 #include "parser/DefBlockSyntaxParser.h"
 #include "string/case_conv.h"

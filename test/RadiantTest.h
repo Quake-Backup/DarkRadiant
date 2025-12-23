@@ -102,7 +102,7 @@ protected:
             // Startup the application
             _coreModule->get()->startup();
         }
-        catch (const radiant::IRadiant::StartupFailure& ex) {
+        catch (const std::exception& ex) {
             // An unhandled exception during module initialisation => display a popup and exit
             rError() << "Unhandled Exception: " << ex.what() << std::endl;
 #if defined(__linux__)
