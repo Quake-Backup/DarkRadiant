@@ -61,13 +61,12 @@ IMapWriterPtr Doom3MapFormat::getMapWriter() const
     return IMapWriterPtr(new Doom3MapWriter);
 }
 
-bool Doom3MapFormat::allowInfoFileCreation() const
+bool Doom3MapFormat::canLoad(std::istream& stream) const
 {
-    // allow .darkradiant files to be saved
-    return true;
+    return hasMapVersion(stream, MAP_VERSION_D3);
 }
 
-bool Doom3MapFormat::canLoad(std::istream& stream) const
+bool Doom3MapFormat::hasMapVersion(std::istream& stream, float mapVersion)
 {
     // Instantiate a tokeniser to read the first few tokens
     parser::BasicDefTokeniser<std::istream> tok(stream);
@@ -81,7 +80,7 @@ bool Doom3MapFormat::canLoad(std::istream& stream) const
         // Require specific version, return true on success
         const std::string verTok = tok.nextToken();
         float version;
-        return string::tryConvertToFloat(verTok, version) && version == MAP_VERSION_D3;
+        return string::tryConvertToFloat(verTok, version) && version == mapVersion;
     }
     catch (parser::ParseException&)
     {}

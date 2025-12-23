@@ -70,11 +70,6 @@ IMapWriterPtr PortableMapFormat::getMapWriter() const
 	return std::make_shared<PortableMapWriter>();
 }
 
-bool PortableMapFormat::allowInfoFileCreation() const
-{
-	return false;
-}
-
 bool PortableMapFormat::canLoad(std::istream& stream) const
 {
 	return PortableMapReader::CanLoad(stream);

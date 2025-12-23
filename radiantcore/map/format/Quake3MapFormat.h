@@ -17,7 +17,6 @@ public:
     // Map reader is shared by Q3 and Q3 alternate
 	virtual IMapReaderPtr getMapReader(IMapImportFilter& filter) const override;
 
-	virtual bool allowInfoFileCreation() const override;
 	virtual bool canLoad(std::istream& stream) const override;
 
 protected:

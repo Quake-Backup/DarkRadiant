@@ -41,12 +41,6 @@ IMapReaderPtr Quake3MapFormatBase::getMapReader(IMapImportFilter& filter) const
     return std::make_shared<Quake3MapReader>(filter);
 }
 
-bool Quake3MapFormatBase::allowInfoFileCreation() const
-{
-    // allow .darkradiant files to be saved
-    return true;
-}
-
 bool Quake3MapFormatBase::canLoad(std::istream& stream) const
 {
     // Instantiate a tokeniser to read the first few tokens

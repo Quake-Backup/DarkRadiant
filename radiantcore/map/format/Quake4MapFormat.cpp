@@ -1,7 +1,5 @@
 #include "Quake4MapFormat.h"
-
-#include "parser/DefTokeniser.h"
-
+#include "Doom3MapFormat.h"
 #include "Quake4MapReader.h"
 #include "Quake4MapWriter.h"
 
@@ -65,32 +63,9 @@ IMapWriterPtr Quake4MapFormat::getMapWriter() const
     return IMapWriterPtr(new Quake4MapWriter);
 }
 
-bool Quake4MapFormat::allowInfoFileCreation() const
-{
-    // allow .darkradiant files to be saved
-    return true;
-}
-
 bool Quake4MapFormat::canLoad(std::istream& stream) const
 {
-    // Instantiate a tokeniser to read the first few tokens
-    parser::BasicDefTokeniser<std::istream> tok(stream);
-
-    try
-    {
-        // Require a "Version" token
-        if (const std::string token = tok.nextToken(); token != "Version")
-            return false;
-
-        // Require specific version, return true on success
-        const std::string verTok = tok.nextToken();
-        float version;
-        return string::tryConvertToFloat(verTok, version) && version == MAP_VERSION_Q4;
-    }
-    catch (parser::ParseException&)
-    {}
-
-    return false;
+    return Doom3MapFormat::hasMapVersion(stream, MAP_VERSION_Q4);
 }
 
 module::StaticModuleRegistration<Quake4MapFormat> q4MapModule;
