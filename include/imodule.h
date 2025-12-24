@@ -96,6 +96,12 @@ public:
     /// Return the list of command line arguments.
     virtual const ArgumentList& getCmdLineArgs() const = 0;
 
+    /// Return true if Python should be disabled for this session
+    virtual bool isPythonDisabled() const
+    {
+        return false;
+    }
+
     /// Retrieve a function pointer which can handle assertions and runtime errors
     virtual const ErrorHandlingFunction& getErrorHandlingFunction() const = 0;
 };
