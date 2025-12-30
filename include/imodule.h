@@ -96,12 +96,6 @@ public:
     /// Return the list of command line arguments.
     virtual const ArgumentList& getCmdLineArgs() const = 0;
 
-    /// Return true if Python should be disabled for this session
-    virtual bool isPythonDisabled() const
-    {
-        return false;
-    }
-
     /// Retrieve a function pointer which can handle assertions and runtime errors
     virtual const ErrorHandlingFunction& getErrorHandlingFunction() const = 0;
 };
@@ -153,6 +147,15 @@ public:
      * by getName()) of a module which must be initialised before this one.
      */
     virtual StringSet getDependencies() const { return {}; }
+
+    /**
+     * @brief Return true if this module can be lazily initialised.
+     *
+     * If a module is marked as lazy and no other non-lazy modules depend on it, the
+     * module system will not automatically initialise it on startup. Instead, the module
+     * will be initialised the first time it is requested with IModuleRegistry::getModule.
+     */
+    virtual bool isLazy() const { return false; }
 
     /**
      * @brief Instruct this module to initialise itself.
@@ -241,16 +244,19 @@ public:
     virtual void shutdownModules() = 0;
 
     /**
-     * Retrieve the module associated with the provided unique name. If the
-     * named module is not found, an empty RegisterableModulePtr is returned
-     * (this allows modules to be optional).
+     * Retrieve the module associated with the provided unique name. If the named module
+     * is not found, an empty RegisterableModulePtr is returned (this allows modules to be
+     * optional).
      *
-     * Note that the return value of this function is RegisterableModulePtr,
-     * which in itself is useless to application code. It is up to the accessor
-     * functions defined in each module interface (e.g. GlobalEntityCreator())
-     * to downcast the pointer to the appropriate type.
+     * Note that the return value of this function is RegisterableModulePtr, which in
+     * itself is useless to application code. It is up to the accessor functions defined
+     * in each module interface (e.g. GlobalEntityCreator()) to downcast the pointer to
+     * the appropriate type.
+     *
+     * Requesting a module may result in changes to module initialisation state, if the
+     * requested module is lazy and has not yet been initialised.
      */
-    virtual RegisterableModulePtr getModule(const std::string& name) const = 0;
+    virtual RegisterableModulePtr getModule(const std::string& name) = 0;
 
     /**
      * Returns TRUE if the named module exists in the records.

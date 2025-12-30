@@ -52,12 +52,6 @@ public:
         }
     }
 
-    // Python is disabled in unit tests
-    bool isPythonDisabled() const override
-    {
-        return true;
-    }
-
     // Returns the path to the test/resources/tdm/ folder shipped with the DR sources
     virtual std::string getTestProjectPath() const
     {

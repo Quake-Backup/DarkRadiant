@@ -65,10 +65,11 @@ public:
     void executeCommand(const std::string& name);
 
     // RegisterableModule implementation
-    std::string getName() const override;
-    StringSet getDependencies() const override;
+    std::string getName() const override { return MODULE_SCRIPTING_SYSTEM; }
+    StringSet getDependencies() const override { return { MODULE_COMMANDSYSTEM }; }
     void initialiseModule(const IApplicationContext& ctx) override;
     void shutdownModule() override;
+    bool isLazy() const override { return true; }
 
 private:
     void executeScriptFile(const std::string& filename, bool setExecuteCommandAttr);

@@ -203,34 +203,8 @@ void ScriptingSystem::reloadScripts()
     _sigScriptsReloaded.emit();
 }
 
-// RegisterableModule implementation
-std::string ScriptingSystem::getName() const
-{
-    static std::string _name(MODULE_SCRIPTING_SYSTEM);
-    return _name;
-}
-
-StringSet ScriptingSystem::getDependencies() const
-{
-    static StringSet _dependencies;
-
-    if (_dependencies.empty())
-    {
-        _dependencies.insert(MODULE_COMMANDSYSTEM);
-    }
-
-    return _dependencies;
-}
-
 void ScriptingSystem::initialiseModule(const IApplicationContext& ctx)
 {
-    if (ctx.isPythonDisabled())
-        return;
-
-    // Subscribe to get notified as soon as Radiant is fully initialised
-    module::GlobalModuleRegistry().signal_allModulesInitialised()
-        .connect(sigc::mem_fun(*this, &ScriptingSystem::initialise));
-
     // Construct the script path
     _scriptPath = ctx.getRuntimeDataPath() + SCRIPT_PATH;
 
@@ -282,6 +256,10 @@ void ScriptingSystem::initialiseModule(const IApplicationContext& ctx)
     );
 
     SceneNodeBuffer::Instance().clear();
+
+    // ScriptingSystem is a lazy module, so initialiseModule() is called late enough that
+    // we can initialise Python immediately.
+    initialise();
 }
 
 void ScriptingSystem::shutdownModule()
