@@ -28,9 +28,9 @@
 #include "selectionlib.h"
 #include "registry/registry.h"
 #include "scene/Clone.h"
+#include "scene/Entity.h"
 #include "scene/EntityNode.h"
 #include "map/algorithm/Import.h"
-#include "scene/EntityNode.h"
 #include "scene/BasicRootNode.h"
 #include "debugging/debugging.h"
 #include "selection/TransformationVisitors.h"
@@ -1399,7 +1399,7 @@ void scatterObjects(ScatterDensityMethod densityMethod,
       return;
     }
 
-    Entity *entity = Node_getEntity(node);
+    auto entity = node->tryGetEntity();
     if (entity) {
       if (entity->getKeyValue("classname") != "worldspawn") {
         modelsToScatter.push_back(node);
