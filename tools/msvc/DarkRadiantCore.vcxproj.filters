@@ -325,16 +325,10 @@
     <ClCompile Include="..\..\radiantcore\filters\BasicFilterSystem.cpp">
       <Filter>src\filters</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\radiantcore\filters\SceneFilter.cpp">
-      <Filter>src\filters</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\radiantcore\filters\XmlFilterEventAdapter.cpp">
       <Filter>src\filters</Filter>
     </ClCompile>
     <ClCompile Include="..\..\radiantcore\shaders\textures\GLTextureManager.cpp">
-      <Filter>src\shaders\textures</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\radiantcore\shaders\textures\TextureManipulator.cpp">
       <Filter>src\shaders\textures</Filter>
     </ClCompile>
     <ClCompile Include="..\..\radiantcore\shaders\CameraCubeMapDecl.cpp">
@@ -347,9 +341,6 @@
       <Filter>src\shaders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\radiantcore\shaders\MapExpression.cpp">
-      <Filter>src\shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\radiantcore\shaders\ShaderExpression.cpp">
       <Filter>src\shaders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\radiantcore\shaders\ShaderLibrary.cpp">
@@ -949,9 +940,6 @@
     <ClCompile Include="..\..\radiantcore\decl\FavouritesManager.cpp">
       <Filter>src\decl</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\radiantcore\eclass\EntityClass.cpp">
-      <Filter>src\eclass</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\radiantcore\shaders\ExpressionSlots.cpp">
       <Filter>src\shaders</Filter>
     </ClCompile>
@@ -1314,9 +1302,6 @@
     <ClInclude Include="..\..\radiantcore\filters\SetObjectSelectionByFilterWalker.h">
       <Filter>src\filters</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\radiantcore\filters\SceneFilter.h">
-      <Filter>src\filters</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\radiantcore\filters\XmlFilterEventAdapter.h">
       <Filter>src\filters</Filter>
     </ClInclude>
@@ -1324,12 +1309,6 @@
       <Filter>src\shaders\textures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\radiantcore\shaders\textures\GLTextureManager.h">
-      <Filter>src\shaders\textures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\radiantcore\shaders\textures\HeightmapCreator.h">
-      <Filter>src\shaders\textures</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\radiantcore\shaders\textures\TextureManipulator.h">
       <Filter>src\shaders\textures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\radiantcore\shaders\CameraCubeMapDecl.h">
@@ -1342,12 +1321,6 @@
       <Filter>src\shaders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\radiantcore\shaders\MapExpression.h">
-      <Filter>src\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\radiantcore\shaders\NamedBindable.h">
-      <Filter>src\shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\radiantcore\shaders\ShaderExpression.h">
       <Filter>src\shaders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\radiantcore\shaders\ShaderLibrary.h">
@@ -2051,9 +2024,6 @@
     </ClInclude>
     <ClInclude Include="..\..\radiantcore\entity\algorithm\Speaker.h">
       <Filter>src\entity\algorithm</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\radiantcore\eclass\EntityClass.h">
-      <Filter>src\eclass</Filter>
     </ClInclude>
     <ClInclude Include="..\..\radiantcore\shaders\VideoMapExpression.h">
       <Filter>src\shaders</Filter>

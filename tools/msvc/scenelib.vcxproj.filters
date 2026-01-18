@@ -7,6 +7,15 @@
     <Filter Include="scene\merge">
       <UniqueIdentifier>{b3592cff-e97d-4da2-ade5-caef2835f906}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scene\filters">
+      <UniqueIdentifier>{ae9b4d00-eeef-424c-85ea-aaf0225860a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene\textures">
+      <UniqueIdentifier>{3db7d0de-aec7-493a-bdbb-d55615473fb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene\shaders">
+      <UniqueIdentifier>{34bc6961-39fa-4f62-a079-05447a2bf2e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\libs\scene\InstanceWalkers.cpp">
@@ -57,6 +66,9 @@
     <ClCompile Include="..\..\libs\scene\Entity.cpp">
       <Filter>scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\libs\scene\EntityClass.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\libs\scene\EntityKeyValue.cpp">
       <Filter>scene</Filter>
     </ClCompile>
@@ -101,6 +113,18 @@
     </ClCompile>
     <ClCompile Include="..\..\libs\scene\TargetManager.cpp">
       <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\scene\filters\SceneFilter.cpp">
+      <Filter>scene\filters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\scene\filters\FilterGroup.cpp">
+      <Filter>scene\filters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\scene\shaders/ShaderExpression.cpp">
+      <Filter>scene\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\libs\scene\textures/TextureManipulator.cpp">
+      <Filter>scene\textures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +250,9 @@
     <ClInclude Include="..\..\libs\scene\Entity.h">
       <Filter>scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\libs\scene\EntityClass.h">
+      <Filter>scene</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\libs\scene\EntityAttachment.h">
       <Filter>scene</Filter>
     </ClInclude>
@@ -294,6 +321,27 @@
     </ClInclude>
     <ClInclude Include="..\..\libs\scene\TargetManager.h">
       <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\scene\filters\SceneFilter.h">
+      <Filter>scene\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\scene\filters\FilterGroup.h">
+      <Filter>scene\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\scene\filters\FilterRule.h">
+      <Filter>scene\filters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\scene\shaders/NamedBindable.h">
+      <Filter>scene\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\scene\shaders/ShaderExpression.h">
+      <Filter>scene\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\scene\textures/HeightmapCreator.h">
+      <Filter>scene\textures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\libs\scene\textures/TextureManipulator.h">
+      <Filter>scene\textures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

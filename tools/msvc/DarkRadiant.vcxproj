@@ -344,7 +344,6 @@
     <ClCompile Include="..\..\radiant\ui\prefdialog\PreferenceItem.cpp" />
     <ClCompile Include="..\..\radiant\ui\prefdialog\PrefPage.cpp" />
     <ClCompile Include="..\..\radiant\ui\script\ScriptMenu.cpp" />
-    <ClCompile Include="..\..\radiant\ui\script\ScriptUserInterfaceModule.cpp" />
     <ClCompile Include="..\..\radiant\ui\script\ScriptWindow.cpp" />
     <ClCompile Include="..\..\radiant\ui\selectionset\SelectionSetToolmenu.cpp" />
     <ClCompile Include="..\..\radiant\ui\skin\SkinEditor.cpp" />
