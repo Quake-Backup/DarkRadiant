@@ -590,7 +590,7 @@ void arrayCloneSelectedSpline(int count, bool alignToSpline)
 	Matrix4 curveTransform = curveNode->localToWorld();
 
 	// We need to get the control points from the entity spawnargs
-	Entity* entity = Node_getEntity(curveNode);
+	Entity* entity = curveNode->tryGetEntity();
 	if (!entity)
 	{
 		throw cmd::ExecutionFailure(_("Cannot create spline array: Could not access curve entity data."));
