@@ -181,6 +181,7 @@
     <ClInclude Include="..\..\include\irenderableobject.h" />
     <ClInclude Include="..\..\include\irendersystemfactory.h" />
     <ClInclude Include="..\..\include\irenderview.h" />
+    <ClInclude Include="..\..\include\iscatter.h" />
     <ClInclude Include="..\..\include\iscenegraph.h" />
     <ClInclude Include="..\..\include\iscenegraphfactory.h" />
     <ClInclude Include="..\..\include\iscript.h" />

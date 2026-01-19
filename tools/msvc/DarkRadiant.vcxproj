@@ -343,6 +343,7 @@
     <ClCompile Include="..\..\radiant\ui\prefdialog\PrefDialog.cpp" />
     <ClCompile Include="..\..\radiant\ui\prefdialog\PreferenceItem.cpp" />
     <ClCompile Include="..\..\radiant\ui\prefdialog\PrefPage.cpp" />
+    <ClCompile Include="..\..\radiant\ui\scatter\ScatterDialog.cpp" />
     <ClCompile Include="..\..\radiant\ui\script\ScriptMenu.cpp" />
     <ClCompile Include="..\..\radiant\ui\script\ScriptWindow.cpp" />
     <ClCompile Include="..\..\radiant\ui\selectionset\SelectionSetToolmenu.cpp" />
@@ -574,6 +575,7 @@
     <ClInclude Include="..\..\radiant\ui\prefdialog\PrefDialog.h" />
     <ClInclude Include="..\..\radiant\ui\prefdialog\PreferenceItem.h" />
     <ClInclude Include="..\..\radiant\ui\prefdialog\PrefPage.h" />
+    <ClInclude Include="..\..\radiant\ui\scatter\ScatterDialog.h" />
     <ClInclude Include="..\..\radiant\ui\script\ScriptMenu.h" />
     <ClInclude Include="..\..\radiant\ui\script\ScriptPanel.h" />
     <ClInclude Include="..\..\radiant\ui\script\ScriptWindow.h" />
