@@ -166,6 +166,40 @@ bool Brush_subtract(const BrushNodePtr& brush, const Brush& other, BrushPtrVecto
 	return false;
 }
 
+// Clips the given brush to be inside the clipper brush
+// Returns true if intersection exists and result is valid
+bool Brush_intersect(BrushNodePtr& brush, const Brush& clipper)
+{
+	if (!brush->getBrush().localAABB().intersects(clipper.localAABB()))
+	{
+		return false;  // AABBs don't overlap - no intersection possible
+	}
+
+	for (Brush::const_iterator i(clipper.begin()); i != clipper.end(); ++i)
+	{
+		const Face& face = *(*i);
+
+		if (!face.contributes()) continue;
+
+		BrushSplitType split = brush->getBrush().classifyPlane(face.plane3());
+
+		if (split.counts[ePlaneFront] != 0 && split.counts[ePlaneBack] != 0)
+		{
+			// Brush spans this plane - clip to keep only inside (back) part
+			brush->getBrush().addFace(face);
+		}
+		else if (split.counts[ePlaneBack] == 0)
+		{
+			// All vertices in front/on plane = brush entirely outside clipper
+			return false;
+		}
+		// else: all vertices behind = already inside this half-space, continue
+	}
+
+	brush->getBrush().removeEmptyFaces();
+	return !brush->getBrush().empty();
+}
+
 class SubtractBrushesFromUnselected :
 	public scene::NodeVisitor
 {
@@ -492,6 +526,117 @@ void mergeSelectedBrushes(const cmd::ArgumentList& args)
 	SceneChangeNotify();
 }
 
+void intersectSelectedBrushes(const cmd::ArgumentList& args)
+{
+	BrushPtrVector brushes = selection::algorithm::getSelectedBrushes();
+
+	if (brushes.empty())
+	{
+		throw cmd::ExecutionNotPossible(_("CSG Intersect: No brushes selected."));
+	}
+
+	if (brushes.size() < 2)
+	{
+		throw cmd::ExecutionNotPossible(_("CSG Intersect: At least 2 brushes must be selected."));
+	}
+
+	// Group the brushes by their parents
+	std::map<scene::INodePtr, BrushPtrVector> brushesByEntity;
+
+	for (const auto& brushNode : brushes)
+	{
+		auto parent = brushNode->getParent();
+
+		if (brushesByEntity.find(parent) == brushesByEntity.end())
+		{
+			brushesByEntity[parent] = BrushPtrVector();
+		}
+
+		brushesByEntity[parent].emplace_back(brushNode);
+	}
+
+	bool selectionIsSuitable = false;
+	// At least one group should have more than two members
+	for (const auto& pair : brushesByEntity)
+	{
+		if (pair.second.size() >= 2)
+		{
+			selectionIsSuitable = true;
+			break;
+		}
+	}
+
+	if (!selectionIsSuitable)
+	{
+		throw cmd::ExecutionNotPossible(_("CSG Intersect: At least two brushes of the same entity have to be selected."));
+	}
+
+	UndoableCommand undo("brushIntersect");
+
+	bool anyIntersected = false;
+
+	for (const auto& pair : brushesByEntity)
+	{
+		if (pair.second.size() < 2)
+		{
+			continue;
+		}
+
+		const auto& group = pair.second;
+
+		// Take the last selected node as reference for layers and parent
+		auto lastBrush = group.back();
+		auto parent = lastBrush->getParent();
+
+		// Start with clone of first brush
+		BrushNodePtr result = std::dynamic_pointer_cast<BrushNode>(group[0]->clone());
+
+		// Intersect with each subsequent brush
+		bool valid = true;
+		for (std::size_t i = 1; i < group.size() && valid; ++i)
+		{
+			valid = Brush_intersect(result, group[i]->getBrush());
+		}
+
+		if (!valid || result->getBrush().empty())
+		{
+			continue;
+		}
+
+		anyIntersected = true;
+
+		// Create new brush with result geometry
+		scene::INodePtr newBrush = GlobalBrushCreator().createBrush();
+
+		parent->addChildNode(newBrush);
+
+		// Move the new brush to the same layers as the source
+		newBrush->assignToLayers(lastBrush->getLayers());
+
+		result->getBrush().removeEmptyFaces();
+		ASSERT_MESSAGE(!result->getBrush().empty(), "brush left with no faces after intersect");
+
+		Node_getBrush(newBrush)->copy(result->getBrush());
+
+		// Remove the original brushes
+		for (const auto& brush : group)
+		{
+			scene::removeNodeFromParent(brush);
+		}
+
+		// Select the new brush
+		Node_setSelected(newBrush, true);
+	}
+
+	if (!anyIntersected)
+	{
+		throw cmd::ExecutionFailure(_("CSG Intersect: Failed - no valid intersection found."));
+	}
+
+	rMessage() << "CSG Intersect: Succeeded." << std::endl;
+	SceneChangeNotify();
+}
+
 void registerCommands()
 {
     using selection::pred::haveBrush;
@@ -499,6 +644,7 @@ void registerCommands()
     GlobalCommandSystem().addWithCheck("CSGSubtract", subtractBrushesFromUnselected,
                                        haveBrush);
     GlobalCommandSystem().addWithCheck("CSGMerge", mergeSelectedBrushes, haveBrush);
+    GlobalCommandSystem().addWithCheck("CSGIntersect", intersectSelectedBrushes, haveBrush);
     GlobalCommandSystem().addWithCheck("CSGHollow", hollowSelectedBrushes, haveBrush);
     GlobalCommandSystem().addWithCheck("CSGRoom", makeRoomForSelectedBrushes, haveBrush);
 }

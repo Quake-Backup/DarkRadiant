@@ -45,6 +45,11 @@ void subtractBrushesFromUnselected(const cmd::ArgumentList& args);
 void mergeSelectedBrushes(const cmd::ArgumentList& args);
 
 /**
+ * Intersects selected brushes, keeping only the overlapping volume.
+ */
+void intersectSelectedBrushes(const cmd::ArgumentList& args);
+
+/**
  * Connect the various events to the functions in this namespace
  */
 void registerCommands();
