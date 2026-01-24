@@ -6,13 +6,13 @@ install(TARGETS radiantcore script sound
         LIBRARY DESTINATION ${PKGLIBDIR}/modules)
 
 # Install Dark Mod plugins
-if (${ENABLE_DM_PLUGINS})
+if (ENABLE_DM_PLUGINS)
     install(TARGETS dm_stimresponse dm_objectives dm_difficulty dm_editing
                     dm_gui dm_gameconnection dm_conversation
             LIBRARY DESTINATION ${PKGLIBDIR}/plugins)
 endif()
 
-if (${ENABLE_GIT_PLUGIN} AND ${LIBGIT_FOUND})
+if (ENABLE_GIT_PLUGIN AND LIBGIT_FOUND)
     install(TARGETS vcs LIBRARY DESTINATION ${PKGLIBDIR}/plugins)
 endif()
 
@@ -42,7 +42,7 @@ install(FILES ${PROJECT_SOURCE_DIR}/install/net.darkradiant.DarkRadiant.metainfo
         DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
 
 # Install locale data
-if (${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.14")
+if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.14")
     # CMake 3.14 and above support TYPE LOCALE, they deduct DESTINATION themselves
     install(DIRECTORY install/i18n/de TYPE LOCALE FILES_MATCHING PATTERN "*.mo")
 else()
