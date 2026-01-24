@@ -370,6 +370,9 @@
     <ClCompile Include="..\..\radiant\xyview\tools\ClipperTool.cpp">
       <Filter>src\xyview\tools</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\radiant\xyview\tools\PolygonTool.cpp">
+      <Filter>src\xyview\tools</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\radiant\ui\mousetool\ToolMappingDialog.cpp">
       <Filter>src\ui\mousetool</Filter>
     </ClCompile>
@@ -919,6 +922,9 @@
       <Filter>src\xyview\tools</Filter>
     </ClInclude>
     <ClInclude Include="..\..\radiant\xyview\tools\ClipperTool.h">
+      <Filter>src\xyview\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\radiant\xyview\tools\PolygonTool.h">
       <Filter>src\xyview\tools</Filter>
     </ClInclude>
     <ClInclude Include="..\..\radiant\xyview\tools\ZoomTool.h">
