@@ -188,6 +188,9 @@
     <Filter Include="src\ui\console">
       <UniqueIdentifier>{66e30145-e977-405c-9507-fc783318215a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\ui\decalshooter">
+      <UniqueIdentifier>{fe90a752-ef9b-4501-a9c2-e5b3f41c2259}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\ui\fx">
       <UniqueIdentifier>{7d1fd900-f463-401a-bceb-d04af2bd05f3}</UniqueIdentifier>
     </Filter>
@@ -207,6 +210,12 @@
     </ClCompile>
     <ClCompile Include="..\..\radiant\camera\CameraSettings.cpp">
       <Filter>src\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\radiant\camera\tools\FaceIntersectionFinder.cpp">
+      <Filter>src\camera\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\radiant\camera\tools\DecalShooterTool.cpp">
+      <Filter>src\camera\tools</Filter>
     </ClCompile>
     <ClCompile Include="..\..\radiant\camera\CamWnd.cpp">
       <Filter>src\camera</Filter>
@@ -658,6 +667,9 @@
     <ClCompile Include="..\..\radiant\ui\console\Console.cpp">
       <Filter>src\ui\console</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\radiant\ui\decalshooter\DecalShooterPanel.cpp">
+      <Filter>src\ui\decalshooter</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\radiant\ui\materials\MaterialSelector.cpp">
       <Filter>src\ui\materials</Filter>
     </ClCompile>
@@ -935,6 +947,12 @@
     </ClInclude>
     <ClInclude Include="..\..\radiant\xyview\tools\MoveViewTool.h">
       <Filter>src\xyview\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\radiant\camera\tools\FaceInterSectionFinder.h">
+      <Filter>src\camera\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\radiant\camera\tools\DecalShooterTool.h">
+      <Filter>src\camera\tools</Filter>
     </ClInclude>
     <ClInclude Include="..\..\radiant\camera\tools\ShaderClipboardTools.h">
       <Filter>src\camera\tools</Filter>
@@ -1343,6 +1361,12 @@
     </ClInclude>
     <ClInclude Include="..\..\radiant\ui\console\Console.h">
       <Filter>src\ui\console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\radiant\ui\decalshooter\DecalShooterPanel.h">
+      <Filter>src\ui\decalshooter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\radiant\ui\decalshooter\DecalShooterControl.h">
+      <Filter>src\ui\decalshooter</Filter>
     </ClInclude>
     <ClInclude Include="..\..\radiant\ui\einspector\TargetKey.h">
       <Filter>src\ui\einspector</Filter>
