@@ -224,4 +224,121 @@ TEST_F(CsgTest, CSGMergeWithFuncStatic)
     ASSERT_TRUE(walker.getEntityNode()->hasChildNodes());
 }
 
+TEST_F(CsgTest, CSGIntersectTwoOverlappingBrushes)
+{
+    loadMap("csg_intersect.map");
+
+    auto worldspawn = GlobalMapModule().getWorldspawn();
+
+    // Find the two overlapping brushes with materials "1" and "2"
+    auto firstBrush = algorithm::findFirstBrushWithMaterial(worldspawn, "1");
+    auto secondBrush = algorithm::findFirstBrushWithMaterial(worldspawn, "2");
+
+    ASSERT_TRUE(firstBrush != nullptr);
+    ASSERT_TRUE(secondBrush != nullptr);
+    ASSERT_TRUE(Node_getIBrush(firstBrush)->getNumFaces() == 6);
+    ASSERT_TRUE(Node_getIBrush(secondBrush)->getNumFaces() == 6);
+
+    // Select the brushes and intersect them
+    GlobalSelectionSystem().setSelectedAll(false);
+    Node_setSelected(firstBrush, true);
+    Node_setSelected(secondBrush, true);
+
+    // CSG intersect
+    GlobalCommandSystem().executeCommand("CSGIntersect");
+
+    // The two brushes should be gone, replaced by a new one
+    ASSERT_TRUE(firstBrush->getParent() == nullptr);
+    ASSERT_TRUE(secondBrush->getParent() == nullptr);
+
+    // The intersection should have created a new brush
+    // It should have materials from the first brush (since we started with that)
+    auto resultBrush = algorithm::findFirstBrushWithMaterial(worldspawn, "1");
+    ASSERT_TRUE(resultBrush != nullptr);
+
+    // The result should be a valid 6-sided brush (the intersection of two cubes is a cube)
+    ASSERT_TRUE(Node_getIBrush(resultBrush)->getNumFaces() == 6);
+}
+
+TEST_F(CsgTest, CSGIntersectNonOverlappingBrushes)
+{
+    loadMap("csg_intersect.map");
+
+    auto worldspawn = GlobalMapModule().getWorldspawn();
+
+    // Find brush "1" and the non-overlapping brush "3"
+    auto firstBrush = algorithm::findFirstBrushWithMaterial(worldspawn, "1");
+    auto nonOverlappingBrush = algorithm::findFirstBrushWithMaterial(worldspawn, "3");
+
+    ASSERT_TRUE(firstBrush != nullptr);
+    ASSERT_TRUE(nonOverlappingBrush != nullptr);
+
+    // Select the brushes
+    GlobalSelectionSystem().setSelectedAll(false);
+    Node_setSelected(firstBrush, true);
+    Node_setSelected(nonOverlappingBrush, true);
+
+    // CSG intersect - should fail silently because brushes don't overlap
+    GlobalCommandSystem().executeCommand("CSGIntersect");
+
+    // The original brushes should still exist (operation failed, no changes)
+    ASSERT_TRUE(firstBrush->getParent() != nullptr);
+    ASSERT_TRUE(nonOverlappingBrush->getParent() != nullptr);
+}
+
+TEST_F(CsgTest, CSGIntersectContainedBrush)
+{
+    loadMap("csg_intersect.map");
+
+    auto worldspawn = GlobalMapModule().getWorldspawn();
+
+    // Find brush "1" (large) and brush "4" (small, contained within "1")
+    auto largeBrush = algorithm::findFirstBrushWithMaterial(worldspawn, "1");
+    auto smallBrush = algorithm::findFirstBrushWithMaterial(worldspawn, "4");
+
+    ASSERT_TRUE(largeBrush != nullptr);
+    ASSERT_TRUE(smallBrush != nullptr);
+    ASSERT_TRUE(Node_getIBrush(largeBrush)->getNumFaces() == 6);
+    ASSERT_TRUE(Node_getIBrush(smallBrush)->getNumFaces() == 6);
+
+    // Select the brushes
+    GlobalSelectionSystem().setSelectedAll(false);
+    Node_setSelected(largeBrush, true);
+    Node_setSelected(smallBrush, true);
+
+    // CSG intersect
+    GlobalCommandSystem().executeCommand("CSGIntersect");
+
+    // The two brushes should be gone
+    ASSERT_TRUE(largeBrush->getParent() == nullptr);
+    ASSERT_TRUE(smallBrush->getParent() == nullptr);
+
+    // The result should be a brush equal in size to the small brush
+    // The result will have material "4" since those faces define the intersection volume
+    auto resultBrush = algorithm::findFirstBrushWithMaterial(worldspawn, "4");
+    ASSERT_TRUE(resultBrush != nullptr);
+    ASSERT_TRUE(Node_getIBrush(resultBrush)->getNumFaces() == 6);
+}
+
+TEST_F(CsgTest, CSGIntersectRequiresTwoBrushes)
+{
+    loadMap("csg_intersect.map");
+
+    auto worldspawn = GlobalMapModule().getWorldspawn();
+
+    // Find just one brush
+    auto brush = algorithm::findFirstBrushWithMaterial(worldspawn, "1");
+    ASSERT_TRUE(brush != nullptr);
+
+    // Select only one brush
+    GlobalSelectionSystem().setSelectedAll(false);
+    Node_setSelected(brush, true);
+
+    // CSG intersect - should fail silently because we need at least 2 brushes
+    GlobalCommandSystem().executeCommand("CSGIntersect");
+
+    // The original brush should still exist (operation failed, no changes)
+    ASSERT_TRUE(brush->getParent() != nullptr);
+}
+
 }
